@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/activity_page1_login.xml" value="0.259375" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/activity_page2_creat_room.xml" value="0.264" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/activity_page2_select_room.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/activity_page3_game_ui.xml" value="0.4" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/activity_recyycler_on_click.xml" value="0.259375" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/cardview_recycler_onclick.xml" value="0.259375" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/cardview_recyclerview.xml" value="0.4" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/show_game_interface.xml" value="0.2453125" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/textview_recyclerview.xml" value="0.26358695652173914" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
