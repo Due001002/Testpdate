@@ -161,7 +161,7 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginEnd="50dp"
-        android:background="#F8020A"
+        android:background="#F40757"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
