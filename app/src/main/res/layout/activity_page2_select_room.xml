@@ -4,6 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/select_room"
     tools:context=".Page2_SelectRoom">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="291dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.963">
+
+        <TextView
+            android:id="@+id/textView_Page2_SelectRoom"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="258dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="243dp"
+            android:hint="ชื่อห้อง"
+            android:textAlignment="center"
+            android:textSize="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnNext_Page2_SelectRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="64dp"
+            android:text="ตกลง"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack_Page2_SelectRoom"
+            app:layout_constraintStart_toEndOf="@+id/btnBack_Page2_SelectRoom"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Page2_SelectRoom"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/btnBack_Page2_SelectRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="60dp"
+            android:text="ย้อนกลับ"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_Page2_SelectRoom"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Lobby">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="729dp"
+        android:layout_height="409dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textviewNameRoom_Lobby"
+            android:layout_width="190dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="270dp"
+            android:background="#74FFFFFF"
+            android:hint="ชื่อห้อง"
+            android:textColor="#F6F6F6"
+            android:textColorHint="#E91E63"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textviewUser1_Lobby"
+            android:layout_width="190dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="270dp"
+            android:background="#74FFFFFF"
+            android:hint="ชื่อคนที่1"
+            android:textColorHint="#E91E63"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textviewNameRoom_Lobby" />
+
+        <TextView
+            android:id="@+id/textviewUser2_Lobby"
+            android:layout_width="190dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="270dp"
+            android:background="#74FFFFFF"
+            android:hint="ชื่อคนที่2"
+            android:textColorHint="#E91E63"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textviewUser1_Lobby" />
+
+        <TextView
+            android:id="@+id/textviewUser3_Lobby"
+            android:layout_width="190dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="270dp"
+            android:background="#74FFFFFF"
+            android:hint="ชื่อคนที่3"
+            android:textColorHint="#E91E63"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textviewUser2_Lobby" />
+
+        <TextView
+            android:id="@+id/textviewUser4_Lobby"
+            android:layout_width="190dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="270dp"
+            android:background="#74FFFFFF"
+            android:hint="ชื่อคนที่4"
+            android:textColorHint="#E91E63"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textviewUser3_Lobby" />
+
+        <Button
+            android:id="@+id/btn_Lobby"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="315dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="315dp"
+            android:layout_marginBottom="34dp"
+            android:backgroundTint="#F30F5C"
+            android:text="Button"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textviewUser4_Lobby"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
