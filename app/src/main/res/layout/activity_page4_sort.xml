@@ -161,8 +161,8 @@
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginEnd="50dp"
-        android:background="#F40757"
-        android:text="Button"
+        android:background="#EEFF9800"
+        android:text="ออกจากเกม"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

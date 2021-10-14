@@ -10,9 +10,10 @@ import kotlin.system.exitProcess
 
 class Page4_Sort : AppCompatActivity() {
     var db = FirebaseFirestore.getInstance()
-    var setDataDB = db.collection("data").document("next").collection("room")
-    var dbTestCH = db.collection("data").document("next").collection("room").document("testCH")
+    var db_next = db.collection("data").document("next")
     var dbGiveCard = db.collection("data").document("next").collection("giveCard")
+    var db_data_next_room = db.collection("data").document("next").collection("room")
+    var roomName = ""
     var getUserPage3 = mutableListOf<HashMap<String, Any>>(
         hashMapOf("name" to "due", "point" to 100),
         hashMapOf("name" to "xyz", "point" to 100),
@@ -29,6 +30,7 @@ class Page4_Sort : AppCompatActivity() {
         var getPoint = bundle!!.get("point") as MutableList<Int>
         ggetSize = bundle!!.getInt("getSize")
         getUserPage3 = bundle!!.get("user") as MutableList<HashMap<String, Any>>
+        roomName = bundle!!.get("roomName") as String
         point.addAll(getPoint.sortedDescending())
 //        var pointz =  mutableListOf<Int>()
 //        pointz.add(getUserPage3[0].get("point").toString().toInt())
@@ -165,14 +167,6 @@ class Page4_Sort : AppCompatActivity() {
         btnExitapp.setOnClickListener {
             //exitProcess(0)
            // System.exit(-1)
-            dbTestCH.delete()
-            dbGiveCard.get().addOnSuccessListener {
-                if (!it.isEmpty) {
-                    for (doc in it) {
-                        dbGiveCard.document(doc.id).delete()
-                    }
-                }
-            }
 //            dbTestCH.get().addOnSuccessListener {
 //                if (it.exists()) {
 //                    return@addOnSuccessListener
@@ -191,7 +185,14 @@ class Page4_Sort : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Toast.makeText(baseContext, "onDestroy", Toast.LENGTH_SHORT).show()
+        dbGiveCard.get().addOnSuccessListener {
+            if (!it.isEmpty) {
+                for (doc in it) {
+                    dbGiveCard.document(doc.id).delete()
+                }
+            }
+        }
+        db_data_next_room.document(roomName).delete()
+        db_next.delete()
     }
-
 }

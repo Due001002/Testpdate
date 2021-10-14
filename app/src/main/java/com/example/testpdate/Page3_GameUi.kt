@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.activity_page3_game_ui.*
 
 class Page3_GameUi : AppCompatActivity() {
     var db = FirebaseFirestore.getInstance()
-    var setDataDB = db.collection("data").document("next").collection("room")
-    var dbTestCH = db.collection("data").document("next").collection("room").document("testCH")
+    var db_next = db.collection("data").document("next")
     var dbGiveCard = db.collection("data").document("next").collection("giveCard")
     var db_data_next_room = db.collection("data").document("next").collection("room")
     var gRoomName = ""
@@ -1510,6 +1509,7 @@ class Page3_GameUi : AppCompatActivity() {
         arraypoint.addAll(arrayPoint.sortedDescending())
         logdfix("aaa", "arraypoint: $arraypoint")
         val intent = Intent(this, Page4_Sort::class.java)
+        intent.putExtra("roomName",gRoomName)
         intent.putExtra("getSize", ggetSize)
         intent.putExtra("point", arraypoint)
         intent.putExtra("user", arrayUser as ArrayList<HashMap<String, Any>>)
