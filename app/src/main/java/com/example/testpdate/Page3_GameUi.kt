@@ -1191,6 +1191,38 @@ class Page3_GameUi : AppCompatActivity() {
             )
             db_data_next_room.document(gRoomName).update(setupDataUser)
 
+        }else if (ggetSize == 3) { //TODO SIZE == 3
+            var updateDataUser = listOf<Map<String, Any>>(
+                mapOf(
+                    gKey.name to gMe.get("name").toString(),
+                    gKey.value to 0,
+                    gKey.point to gMePoint,
+                    gKey.status to gMeStatus,
+                    gKey.text to jao,
+                    gKey.card to backCard
+                ),
+                mapOf(
+                    gKey.name to gUser2.get("name").toString(),
+                    gKey.value to 0,
+                    gKey.point to gUser2Point,
+                    gKey.status to gUser2Status,
+                    gKey.text to "",
+                    gKey.card to backCard
+                ),
+                mapOf(
+                    gKey.name to gUser3.get("name").toString(),
+                    gKey.value to 0,
+                    gKey.point to gUser3Point,
+                    gKey.status to gUser3Status,
+                    gKey.text to "",
+                    gKey.card to backCard
+                )
+            )
+            var setupDataUser = mapOf(
+                gKey.card to card,
+                gKey.user to updateDataUser
+            )
+            db_data_next_room.document(gRoomName).update(setupDataUser)
         } else if (ggetSize == 4) { //TODO SIZE == 4
             var updateDataUser = listOf<Map<String, Any>>(
                 mapOf(
