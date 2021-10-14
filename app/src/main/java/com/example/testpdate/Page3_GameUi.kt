@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -45,7 +46,8 @@ class Page3_GameUi : AppCompatActivity() {
     var pointUser4 = 0
     var getCardDB = mutableListOf<String>()
     var jao = "เจ้ามือ"
-    var state = 0
+    var stage = 0
+    var time  = 0
     var round = 0
     var backCard = mutableListOf<String>("n", "n")
     var gKey = key()
@@ -70,7 +72,7 @@ class Page3_GameUi : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page3_game_ui)
-        //mapData.add(getUserMapPage2[0])
+//        mapData.add(getUserMapPage2[0])
         var bundle = intent.extras
         var getCheckName = bundle!!.getString("checkName") as String
         var getUserMapPage2 = bundle!!.get("userHashMap") as HashMap<String, Any>
@@ -78,7 +80,7 @@ class Page3_GameUi : AppCompatActivity() {
         gMe = getUserMapPage2
         logdfix("mapData", "mapData: $mapData")
         btnNext_page3UI.isVisible = false
-        delete()
+        //delete()
         checkStatus()
         begin()
     }
@@ -242,7 +244,8 @@ class Page3_GameUi : AppCompatActivity() {
             if (docs!!.exists()) {
                 var getSizeUser = docs!!.get("user") as MutableList<HashMap<String, Any>>
                 round = docs!!.get(gKey.round).toString().toInt()
-                state = docs!!.get(gKey.state).toString().toInt()
+                stage = docs!!.get(gKey.stage).toString().toInt()
+                time  = docs!!.get(gKey.time).toString().toInt()
                 ggetSize = getSizeUser.size
                 for (doc in getSizeUser) {
                     var getCard = doc!!.get("card") as MutableList<String>
@@ -258,31 +261,31 @@ class Page3_GameUi : AppCompatActivity() {
                             txtPoint1_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                             txtStatus1_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                             txtName1_page3UI.setText("$gMeName")
-                            txtPoint1_page3UI.setText("Point: $gMePoint")
+                            txtPoint1_page3UI.setText("คะแนน: $gMePoint")
                             txtStatus1_page3UI.setText(text)
-                            if (state == 0) {
+                            if (stage == 0) {
                                 imgView1_3_page3UI.setImageResource(R.drawable.backphai)
                                 imgView2_3_page3UI.setImageResource(R.drawable.backphai)
                                 imgView3_3_page3UI.setImageResource(R.drawable.backphai)
                                 imgView4_3_page3UI.setImageResource(R.drawable.backphai)
                             }
-                            if (state >= 1) {
+                            if (stage >= 1) {
                                 txtName1_page3UI.setText("$gMeName /$gMeValue")
-                                txtPoint1_page3UI.setText("Point: $gMePoint")
+                                txtPoint1_page3UI.setText("คะแนน: $gMePoint")
                                 txtStatus1_page3UI.setText(text)
                                 imgView1_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                 imgView1_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                if (getCard.size == 2 && state == 1) {
+                                if (getCard.size == 2 && stage == 1) {
                                     btnGiveCard.isVisible = true
                                     giveCard()
                                 }
-                                if (state == 2) {
+                                if (stage == 2) {
                                     btnGiveCard.isVisible = false
                                     if (getCard.size == 3) {
                                         imgView1_3_page3UI.setImageResource(getCardShow(getCard[2]))
                                     }
                                 }
-                                if (getCard.size == 3 && state == 3) {
+                                if (getCard.size == 3 && stage == 3) {
                                     imgView1_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                     imgView1_2_page3UI.setImageResource(getCardShow(getCard[1]))
                                     imgView1_3_page3UI.setImageResource(getCardShow(getCard[2]))
@@ -290,38 +293,47 @@ class Page3_GameUi : AppCompatActivity() {
                             }
                         } else {
                             txtName1_page3UI.setText("$gMeName")
-                            txtPoint1_page3UI.setText("Point: $gMePoint")
+                            txtPoint1_page3UI.setText("คะแนน: $gMePoint")
                             txtStatus1_page3UI.setText(text)
-                            if (state == 0) {
+                            if (stage == 0) {
                                 imgView1_3_page3UI.setImageResource(R.drawable.backphai)
                                 imgView2_3_page3UI.setImageResource(R.drawable.backphai)
                                 imgView3_3_page3UI.setImageResource(R.drawable.backphai)
                                 imgView4_3_page3UI.setImageResource(R.drawable.backphai)
                             }
-                            if (state >= 1) {
+                            if (stage >= 1) {
                                 txtName1_page3UI.setText("$gMeName / $gMeValue")
-                                txtPoint1_page3UI.setText("Point: $gMePoint")
+                                txtPoint1_page3UI.setText("คะแนน: $gMePoint")
                                 txtStatus1_page3UI.setText(text)
                                 imgView1_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                 imgView1_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                if (getCard.size == 2 && state == 1) {
+                                if (getCard.size == 2 && stage == 1) {
                                     btnGiveCard.isVisible = true
                                     giveCard()
                                 }
-                                if (state == 2) {
+                                if (stage == 2) {
                                     btnGiveCard.isVisible = false
                                     if (getCard.size == 3) {
                                         imgView1_3_page3UI.setImageResource(getCardShow(getCard[2]))
                                     }
                                 }
-                                if (getCard.size == 3 && state == 3) {
+                                if (getCard.size == 3 && stage == 3) {
                                     imgView1_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                     imgView1_2_page3UI.setImageResource(getCardShow(getCard[1]))
                                     imgView1_3_page3UI.setImageResource(getCardShow(getCard[2]))
                                 }
                             }
                         }
-                        txtRound_page3UI.setText("Round:$round/state:$state")
+                        if (stage == 1) {
+                            txtRound_page3UI.setText("รอบ:$round /ขั้นตอน:$stage /เวลา: $time")
+                            if (time > 0) {
+                                btnGiveCard.isVisible = true
+                            } else {
+                                btnGiveCard.isVisible = false
+                            }
+                        } else {
+                            txtRound_page3UI.setText("รอบ:$round /ขั้นตอน:$stage")
+                        }
                         if (round == 5) {
                             sendDataToPage4()
                         }
@@ -338,7 +350,7 @@ class Page3_GameUi : AppCompatActivity() {
                         }
                         var text = doc.get("text").toString()
                         txtName2_page3UI.setText("${gUser2Name}")
-                        txtPoint2_page3UI.setText("Point: ${gUser2Point}")
+                        txtPoint2_page3UI.setText("คะแนน: ${gUser2Point}")
                         txtStatus2_page3UI.setText("$text")
                         if (gUser2Value == 8 || gUser2Value == 9) {
                             if (getCard.size == 2) {
@@ -353,9 +365,9 @@ class Page3_GameUi : AppCompatActivity() {
                             }
 
                         }
-                        if (state >= 3) {
+                        if (stage >= 3) {
                             txtName2_page3UI.setText("${gUser2Name} / ${gUser2Value}")
-                            txtPoint2_page3UI.setText("Point: ${gUser2Point}")
+                            txtPoint2_page3UI.setText("คะแนน: ${gUser2Point}")
                             imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
                             imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
                             if (getCard.size == 3) {
@@ -377,7 +389,7 @@ class Page3_GameUi : AppCompatActivity() {
                         }
                         var text = doc.get("text").toString()
                         txtName3_page3UI.setText("${gUser3Name}")
-                        txtPoint3_page3UI.setText("Point: ${gUser3Point}")
+                        txtPoint3_page3UI.setText("คะแนน: ${gUser3Point}")
                         txtStatus3_page3UI.setText("$text")
 
                         if (gUser3Value == 8 || gUser3Value == 9) {
@@ -392,9 +404,9 @@ class Page3_GameUi : AppCompatActivity() {
                                 imgView3_3_page3UI.setImageResource(getCardShow(getCard[2]))
                             }
                         }
-                        if (state >= 3) {
+                        if (stage >= 3) {
                             txtName3_page3UI.setText("${gUser3Name} / ${gUser3Value}")
-                            txtPoint3_page3UI.setText("Point: ${gUser3Point}")
+                            txtPoint3_page3UI.setText("คะแนน: ${gUser3Point}")
                             imgView3_1_page3UI.setImageResource(getCardShow(getCard[0]))
                             imgView3_2_page3UI.setImageResource(getCardShow(getCard[1]))
                             if (getCard.size == 3) {
@@ -431,9 +443,9 @@ class Page3_GameUi : AppCompatActivity() {
                                 imgView4_3_page3UI.setImageResource(getCardShow(getCard[2]))
                             }
                         }
-                        if (state >= 3) {
+                        if (stage >= 3) {
                             txtName4_page3UI.setText("${gUser4Name} / ${gUser4Value}")
-                            txtPoint4_page3UI.setText("Point: ${gUser4Point}")
+                            txtPoint4_page3UI.setText("คะแนน: ${gUser4Point}")
                             imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
                             imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
 
@@ -490,14 +502,14 @@ class Page3_GameUi : AppCompatActivity() {
     fun nextState() {
         btnNext_page3UI.setOnClickListener {
             db_data_next_room.document(gRoomName).get().addOnSuccessListener {
-                var getRound = it!!.get("round").toString().toInt()
-                var getState = it!!.get("state").toString().toInt()
-                getCardDB = it!!.get("card") as MutableList<String>
+                var getRound = it!!.get("${gKey.round}").toString().toInt()
+                var getState = it!!.get("${gKey.stage}").toString().toInt()
+                getCardDB = it!!.get("${gKey.card}") as MutableList<String>
                 var sumState = getState + 1
-                state = sumState
-                var setData = mapOf<String, Any>("state" to sumState)
-                if (state <= 3) {
-                    when (state) {
+                stage = sumState
+                var setData = mapOf<String, Any>("${gKey.stage}" to sumState)
+                if (stage <= 3) {
+                    when (stage) {
 //                        0 -> {
 //                            dbTestCH.update(setData);state0_ReStart()
 //                        }
@@ -512,14 +524,14 @@ class Page3_GameUi : AppCompatActivity() {
                         }
                     }
                 } else {
-                    state = 0
-                    if (state == 0) {
+                    stage = 0
+                    if (stage == 0) {
                         state0_ReStart()
                     }
                     getRound += 1
                     var setupData = mapOf(
                         gKey.round to getRound,
-                        gKey.state to 0
+                        gKey.stage to 0
                     )
                     db_data_next_room.document(gRoomName).update(setupData)
                 }
@@ -577,7 +589,7 @@ class Page3_GameUi : AppCompatActivity() {
                 gKey.card to getCardDB,
                 gKey.user to updateUser1
             )
-            db_data_next_room.document(gRoomName).update(update)
+            db_data_next_room.document(gRoomName).update(update).addOnSuccessListener {timeCount()}
 
         } else if (ggetSize == 3) { //TODO SIZE == 3
             cardHost.clear()
@@ -642,8 +654,7 @@ class Page3_GameUi : AppCompatActivity() {
                 gKey.card to getCardDB,
                 gKey.user to updateUser1
             )
-            db_data_next_room.document(gRoomName).update(update)
-
+            db_data_next_room.document(gRoomName).update(update).addOnSuccessListener {timeCount()}
         } else if (ggetSize == 4) { //TODO Size == 4
             cardHost.clear()
             cardUser2.clear()
@@ -718,14 +729,14 @@ class Page3_GameUi : AppCompatActivity() {
                 gKey.card to getCardDB,
                 gKey.user to updateUser1
             )
-            db_data_next_room.document(gRoomName).update(update)
+            db_data_next_room.document(gRoomName).update(update).addOnSuccessListener{timeCount()}
         }
     }
 
     //TODO state2_GiveCard
     fun state2_GiveCard() {
         db_data_next_room.document(gRoomName).get().addOnSuccessListener { result ->
-            toast("กำลังแจกไพ่")
+            toast("กำลังแจกไพ่ รอจนกว่าจะแจกไพ่เสร็จ")
             var valuegMeNew = 0
             var valuegUser2New = 0
             var valuegUser3New = 0
@@ -783,7 +794,7 @@ class Page3_GameUi : AppCompatActivity() {
                             gKey.card to getCard
                         )
                         db_data_next_room.document(gRoomName).update(updateUser).addOnSuccessListener {
-                            toast("แจกไพ่สำเร็จแล้ว")
+                            toast("แจกไพ่สำเร็จแล้ว พร้อมเริ่มขั้นตอนต่อไป")
                         }
                     }
                 }
@@ -1505,40 +1516,62 @@ class Page3_GameUi : AppCompatActivity() {
         startActivity(intent)
     }
 
-    //TODO Delete
-    fun delete() {
-        btnN_page3UI.setOnClickListener {
-            db_data_next_room.document(gRoomName).delete()
-            dbGiveCard.get().addOnSuccessListener {
-                for (doc in it!!) {
-                    dbGiveCard.document(doc.id).delete()
-                }
+    //TODO ContTime
+    fun timeCount() {
+        object : CountDownTimer(5000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                var time = millisUntilFinished / 1000
+                var db = mapOf("time" to time)
+                db_data_next_room.document(gRoomName).update(db)
             }
-        }
-        btnX_page3UI.setOnClickListener {
-            var abc = mutableListOf<Map<String, Any>>()
-            dbTestCH.get().addOnSuccessListener {
-//                var G_user2 = ""
-//                var G_user3 = ""
-//                var G_user4 = ""
-//                var G_Me = ""
-                var getUser = it!!.get("user") as MutableList<Map<String, Any>>
-                var a = hashMapOf<String, Any>("name" to "us2", "point" to 500)
-                var b = hashMapOf<String, Any>("name" to "us3", "point" to 500)
-                var c = hashMapOf<String, Any>("name" to "us4", "point" to 500)
-                var d = hashMapOf<String, Any>("name" to "us5", "point" to 500)
-                abc.add(getUser[0])
-                abc.add(a)
-                abc.add(b)
-                abc.add(c)
-                abc.add(d)
-                var m = mapOf<String, Any>(
-                    "user" to abc
-                )
-                dbTestCH.update(m)
+            override fun onFinish() {
+                var db = mapOf("time" to 0)
+                db_data_next_room.document(gRoomName).update(db)
             }
+        }.start()
+    }
+
+    //TODO ReadTime
+    fun readTimeDB() {
+        db_data_next_room.document(gRoomName).addSnapshotListener { docs, error ->
+            time = docs!!.get("${gKey.time}").toString().toInt()
         }
     }
+
+    //TODO Delete
+//    fun delete() {
+//        btnN_page3UI.setOnClickListener {
+//            db_data_next_room.document(gRoomName).delete()
+//            dbGiveCard.get().addOnSuccessListener {
+//                for (doc in it!!) {
+//                    dbGiveCard.document(doc.id).delete()
+//                }
+//            }
+//        }
+//        btnX_page3UI.setOnClickListener {
+//            var abc = mutableListOf<Map<String, Any>>()
+//            dbTestCH.get().addOnSuccessListener {
+////                var G_user2 = ""
+////                var G_user3 = ""
+////                var G_user4 = ""
+////                var G_Me = ""
+//                var getUser = it!!.get("user") as MutableList<Map<String, Any>>
+//                var a = hashMapOf<String, Any>("name" to "us2", "point" to 500)
+//                var b = hashMapOf<String, Any>("name" to "us3", "point" to 500)
+//                var c = hashMapOf<String, Any>("name" to "us4", "point" to 500)
+//                var d = hashMapOf<String, Any>("name" to "us5", "point" to 500)
+//                abc.add(getUser[0])
+//                abc.add(a)
+//                abc.add(b)
+//                abc.add(c)
+//                abc.add(d)
+//                var m = mapOf<String, Any>(
+//                    "user" to abc
+//                )
+//                dbTestCH.update(m)
+//            }
+//        }
+//    }
 
     //TODO toast
     fun toast(a: String) {

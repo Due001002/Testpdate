@@ -19,6 +19,11 @@
         <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/cardview_recyclerview.xml" value="0.4" />
         <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/show_game_interface.xml" value="0.2453125" />
         <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout/textview_recyclerview.xml" value="0.26358695652173914" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/testpdate/app/src/main/res/layout-land/activity_page3_game_ui.xml" value="0.4" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/testpdate/app/src/main/res/layout/activity_page1_login.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/testpdate/app/src/main/res/layout/activity_page2_creat_room.xml" value="0.4" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/testpdate/app/src/main/res/layout/activity_page2_select_room.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/due_m/AndroidStudioProjects/testpdate/app/src/main/res/layout/activity_page4_sort.xml" value="0.24739583333333334" />
         <entry key="..\:/testpdate/app/src/main/res/layout-land/activity_page3_game_ui.xml" value="0.3148148148148148" />
         <entry key="..\:/testpdate/app/src/main/res/layout/activity_page1_login.xml" value="0.5" />
         <entry key="..\:/testpdate/app/src/main/res/layout/activity_page2_creat_room.xml" value="0.28940217391304346" />
@@ -28,7 +33,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

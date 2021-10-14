@@ -17,6 +17,7 @@ class Page2_CreatRoom : AppCompatActivity() {
     var gGetStringEDT = ""
     var gCheckSizePlayer = "กดเพื่อเลือกจำนวนผู้เล่น"
     var gDataArrayUer = mutableListOf<Map<String, Any>>()
+    var gKey = key()
     var db_data_next_room = db.collection("data").document("next").collection("room")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +49,13 @@ class Page2_CreatRoom : AppCompatActivity() {
                 gGetStringEDT = edt_page2_CreatRoom.text.toString()
                 var convertG_sizePlayers  = gSizePlayer.toInt()
                 var dataRoom = mapOf<String, Any>("hostName" to getUserMapPage1["name"].toString(),
-                    "roomName" to gGetStringEDT,
-                    "round" to 1,
-                    "state" to 0,
-                    "sizeUser" to convertG_sizePlayers,
-                    "card" to getCardPage1,
-                    "user" to gDataArrayUer
+                    "${gKey.roomName}" to gGetStringEDT,
+                    "${gKey.round}" to 1,
+                    "${gKey.stage}" to 0,
+                    "${gKey.sizeUser}" to convertG_sizePlayers,
+                    "${gKey.card}" to getCardPage1,
+                    "${gKey.user}" to gDataArrayUer,
+                    "${gKey.time}" to 0
                 )
                 db_data_next_room.document(gGetStringEDT).set(dataRoom)
                 var intent = Intent(this, Page3_GameUi::class.java)
@@ -66,7 +68,7 @@ class Page2_CreatRoom : AppCompatActivity() {
         }
     }
 
-    //TODO onClickInten()
+    //TODO Spinner()
     fun setSpinner() {
         var arrays = mutableListOf<String>("กดเพื่อเลือกจำนวนผู้เล่น", "2", "3", "4")
         spn_selectPlayer.adapter =

@@ -9,8 +9,11 @@ data class key(
     val text: String = "text",
     val card: String = "card",
     val round: String = "round",
-    val state: String = "state",
+    val stage: String = "stage",
     val user:String = "user",
-    val giveCard:String = "giveCard"
+    val time:String = "time",
+    val giveCard:String = "giveCard",
+    val roomName:String ="roomName",
+    val sizeUser:String = "sizeUser"
 )
 data class dataClassCard(var card:Int, var value:Int)

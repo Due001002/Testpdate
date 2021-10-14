@@ -27,11 +27,10 @@
             android:id="@+id/l1"
             android:layout_width="200dp"
             android:layout_height="120dp"
-            android:layout_marginStart="247dp"
-            android:layout_marginEnd="278dp"
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
             app:layout_constraintStart_toStartOf="parent">
 
 
@@ -69,10 +68,10 @@
                 android:id="@+id/txtName1_page3UI"
                 android:layout_width="110dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="73dp"
-                android:layout_marginEnd="11dp"
+                android:layout_marginTop="72dp"
+                android:layout_marginEnd="20dp"
                 android:background="#CDE1BB49"
-                android:hint="ืName / Value"
+                android:hint="ชื่อ"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/txtStatus1_page3UI"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +83,7 @@
                 android:layout_marginTop="73dp"
                 android:layout_marginEnd="10dp"
                 android:background="#E186F1"
-                android:hint="Status"
+                android:hint="สถานะ"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -96,7 +95,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="6dp"
                 android:background="#FFFFFF"
-                android:hint="Point"
+                android:hint="คะแนน: ?"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toStartOf="@+id/imgView1_1_page3UI"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -150,7 +149,7 @@
                 android:layout_marginEnd="6dp"
                 android:layout_marginBottom="24dp"
                 android:background="#FFFFFF"
-                android:hint="Point"
+                android:hint="คะแนน: ?"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imgView3_1_page3UI" />
@@ -162,7 +161,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="73dp"
                 android:background="#E186F1"
-                android:hint="Status"
+                android:hint="สถานะ"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -174,7 +173,7 @@
                 android:layout_marginEnd="11dp"
                 android:layout_marginBottom="73dp"
                 android:background="#CDE1BB49"
-                android:hint="Name / Value"
+                android:hint="ชื่อ"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/txtStatus3_page3UI" />
@@ -186,9 +185,9 @@
             android:layout_width="200dp"
             android:layout_height="120dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="142dp"
+            android:layout_marginTop="143dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginBottom="143dp"
+            android:layout_marginBottom="142dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/txtRound_page3UI"
             app:layout_constraintHorizontal_bias="0.04"
@@ -233,7 +232,7 @@
                 android:layout_marginTop="73dp"
                 android:layout_marginEnd="11dp"
                 android:background="#CDE1BB49"
-                android:hint="Name / Value"
+                android:hint="ชื่อ"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/txtStatus2_page3UI"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -245,7 +244,7 @@
                 android:layout_marginTop="73dp"
                 android:layout_marginEnd="10dp"
                 android:background="#E186F1"
-                android:hint="Status"
+                android:hint="สถานะ"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -257,7 +256,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="6dp"
                 android:background="#FFFFFF"
-                android:hint="Point"
+                android:hint="คะแนน: ?"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toStartOf="@+id/imgView2_1_page3UI"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -314,7 +313,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="73dp"
                 android:background="#E186F1"
-                android:hint="Status"
+                android:hint="สถานะ"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -326,7 +325,7 @@
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="24dp"
                 android:background="#FFFFFF"
-                android:hint="Point"
+                android:hint="คะแนน: ?"
                 android:textSize="13sp"
                 app:layout_constraintStart_toEndOf="@+id/imgView4_3_page3UI"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -338,7 +337,7 @@
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="73dp"
                 android:background="#CDE1BB49"
-                android:hint="Name / Value"
+                android:hint="ชื่อ"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/txtStatus4_page3UI"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -367,7 +366,7 @@
             android:layout_marginEnd="200dp"
             android:layout_marginBottom="7dp"
             android:background="#FF5722"
-            android:text="Next"
+            android:text="ถัดไป"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/l1"
@@ -380,7 +379,7 @@
             android:layout_marginTop="184dp"
             android:layout_marginBottom="40dp"
             android:background="#000000"
-            android:hint="Round: ? Stage: ?  "
+            android:hint="รอบ: ? ขั้นตอน: ?  เวลา: ?"
             android:textAlignment="center"
             android:textColor="#3CD642"
             android:textColorHint="#4CAF50"
@@ -392,37 +391,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnN_page3UI"
-            android:layout_width="82dp"
-            android:layout_height="36dp"
-            android:text="N"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/l1"
-            app:layout_constraintHorizontal_bias="0.218"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnX_page3UI" />
-
-        <Button
-            android:id="@+id/btnX_page3UI"
-            android:layout_width="82dp"
-            android:layout_height="36dp"
-            android:text="X"
-            app:layout_constraintBottom_toTopOf="@+id/btnN_page3UI"
-            app:layout_constraintEnd_toStartOf="@+id/l1"
-            app:layout_constraintHorizontal_bias="0.218"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/l2" />
-
-        <Button
             android:id="@+id/btnGiveCard"
             android:layout_width="120dp"
             android:layout_height="33dp"
-            android:layout_marginStart="120dp"
             android:layout_marginBottom="7dp"
             android:background="#FF5722"
-            android:text="draw card"
+            android:text="จั่วไพ่"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnN_page3UI"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.416"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/l1"
             app:layout_constraintVertical_bias="0.0" />
 

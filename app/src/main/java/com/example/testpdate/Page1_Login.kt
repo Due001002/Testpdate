@@ -36,7 +36,7 @@ class Page1_Login : AppCompatActivity() {
 //        onTest()
         //goToPage3_Test()
         delete()
-//        val intent = Intent(this, Page4_Sort::class.java)
+//        val intent = Intent(this, Page3_GameUi::class.java)
 //        startActivity(intent)
     }
 
@@ -66,33 +66,41 @@ class Page1_Login : AppCompatActivity() {
             var getStringEdt = edt_Page1_login.text.toString()
             db_data_next.get().addOnSuccessListener { docs ->
                 if (!docs!!.exists()) {
-                    var userHashMap = hashMapOf<String, Any>(
-                        "name" to getStringEdt,
-                        "value" to 0,
-                        "point" to 500,
-                        "status" to "host",
-                        "text" to "",
-                        "card" to backCard)
-                    var a = mapOf<String, Any>("data" to "a")
-                    db_data_next.set(a)
-                    val intent = Intent(this, Page2_CreatRoom::class.java)
-                    var cards = card as ArrayList<String>
-                    intent.putExtra("card", cards)
-                    intent.putExtra("userHashMap", userHashMap)
-                    intent.putExtra("checkName",getStringEdt)
-                    startActivity(intent)
+                    if (edt_Page1_login.text.toString() == "") {
+                        toast("โปรดตั้งชื่อเพื่อเข้าร่วมเกม")
+                    } else {
+                        var userHashMap = hashMapOf<String, Any>(
+                            "name" to getStringEdt,
+                            "value" to 0,
+                            "point" to 500,
+                            "status" to "host",
+                            "text" to "",
+                            "card" to backCard)
+                        var a = mapOf<String, Any>("data" to "a")
+                        db_data_next.set(a)
+                        val intent = Intent(this, Page2_CreatRoom::class.java)
+                        var cards = card as ArrayList<String>
+                        intent.putExtra("card", cards)
+                        intent.putExtra("userHashMap", userHashMap)
+                        intent.putExtra("checkName",getStringEdt)
+                        startActivity(intent)
+                    }
                 } else {
-                    var userHashMap = hashMapOf<String, Any>(
-                        "name" to getStringEdt,
-                        "value" to 0,
-                        "point" to 500,
-                        "status" to "user",
-                        "text" to "",
-                        "card" to backCard)
-                    val intent = Intent(this, Page2_SelectRoom::class.java)
-                    intent.putExtra("userHashMap", userHashMap)
-                    intent.putExtra("checkName",getStringEdt)
-                    startActivity(intent)
+                    if (edt_Page1_login.text.toString() == "") {
+                        toast("โปรดตั้งชื่อเพื่อเข้าร่วมเกม")
+                    } else {
+                        var userHashMap = hashMapOf<String, Any>(
+                            "name" to getStringEdt,
+                            "value" to 0,
+                            "point" to 500,
+                            "status" to "user",
+                            "text" to "",
+                            "card" to backCard)
+                        val intent = Intent(this, Page2_SelectRoom::class.java)
+                        intent.putExtra("userHashMap", userHashMap)
+                        intent.putExtra("checkName",getStringEdt)
+                        startActivity(intent)
+                    }
                 }
             }
         }
