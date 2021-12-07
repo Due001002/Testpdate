@@ -87,6 +87,7 @@ class Page2_CreatRoom : AppCompatActivity() {
     //TODO BTN_Back
     private fun btnBackPage1() {
         btnBack_page2_CreatRoom.setOnClickListener {
+            db.collection("data").document("next").delete()
             finish()
         }
     }
@@ -104,11 +105,11 @@ class Page2_CreatRoom : AppCompatActivity() {
         Log.d(a, b)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        toast("onDestroy")
-        db_data_next_room.document(gGetStringEDT).delete().addOnSuccessListener {
-            toast("Destroy !!! delete")
-        }
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        toast("onDestroy")
+//        db_data_next_room.document(gGetStringEDT).delete().addOnSuccessListener {
+//            toast("Destroy !!! delete")
+//        }
+//    }
 }
