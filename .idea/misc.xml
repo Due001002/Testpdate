@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Testpdate/app/src/main/res/layout-land/activity_page3_game_ui.xml" value="0.5" />
+        <entry key="..\:/Testpdate/app/src/main/res/layout/activity_lobby.xml" value="0.20885416666666667" />
+        <entry key="..\:/Testpdate/app/src/main/res/layout/activity_page1_login.xml" value="0.5" />
+        <entry key="..\:/Testpdate/app/src/main/res/layout/activity_page2_creat_room.xml" value="0.5" />
+        <entry key="..\:/Testpdate/app/src/main/res/layout/activity_page2_select_room.xml" value="0.5" />
+        <entry key="..\:/Testpdate/app/src/main/res/layout/activity_page3_game_ui.xml" value="0.371875" />
+        <entry key="..\:/Testpdate/app/src/main/res/layout/activity_page4_sort.xml" value="0.5" />
+        <entry key="..\:/Testpdate/app/src/main/res/layout/cardview_recyclerview.xml" value="0.371875" />
         <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2635416666666667" />
         <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2635416666666667" />
         <entry key="..\:/Users/due_m/AndroidStudioProjects/Testpdate/app/src/main/res/layout-land/activity_page3_game_ui.xml" value="0.4" />

@@ -30,12 +30,12 @@ class Page2_CreatRoom : AppCompatActivity() {
 
     //TODO BTN_Creat
     fun btn_creatRoom() {
-        var bundle = intent.extras
-        var getCheckName = bundle!!.getString("checkName")
-        var getUserMapPage1 = bundle!!.get("userHashMap") as HashMap<String, Any>
-        var getCardPage1 = bundle!!.get("card") as ArrayList<String>
+        var bundle = intent.extras   //TODO รับค่ามาจากหน้าlogin
+        var getCheckName = bundle!!.getString("checkName")                      //TODO  รับค่า checkname มาใส่ตัวแปล แบบสตริง
+        var getUserMapPage1 = bundle!!.get("userHashMap") as HashMap<String, Any>   //TODO  รับค่า userhashmap มาใส่ตัวแปล แบบhashmap
+        var getCardPage1 = bundle!!.get("card") as ArrayList<String>                //TODO  รับค่า card มาใส่ตัวแปล แบบอาเร
         logdfix("userHashMap", "$getUserMapPage1")
-        btnCreat_page2_CreatRoom.setOnClickListener {  //TODO btn_OnClick
+        btnCreat_page2_CreatRoom.setOnClickListener {  //TODO btn_OnClick  ปุ่มกดสร้างห้อง
             if (gSizePlayer == gCheckSizePlayer || edt_page2_CreatRoom.text.toString() == "") {
                 if (gSizePlayer == gCheckSizePlayer && edt_page2_CreatRoom.text.toString() == "") {
                     toast("โปรดตั้งชื่อห้องและเลือกจำนวนผู้เล่น")
@@ -87,6 +87,7 @@ class Page2_CreatRoom : AppCompatActivity() {
     //TODO BTN_Back
     private fun btnBackPage1() {
         btnBack_page2_CreatRoom.setOnClickListener {
+            db.collection("data").document("next").delete()
             finish()
         }
     }
@@ -104,11 +105,6 @@ class Page2_CreatRoom : AppCompatActivity() {
         Log.d(a, b)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        toast("onDestroy")
-        db_data_next_room.document(gGetStringEDT).delete().addOnSuccessListener {
-            toast("Destroy !!! delete")
-        }
-    }
+
+
 }

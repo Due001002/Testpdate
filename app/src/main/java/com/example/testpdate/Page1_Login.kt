@@ -11,15 +11,10 @@ import java.util.ArrayList
 
 
 class Page1_Login : AppCompatActivity() {
-    var db = FirebaseFirestore.getInstance()
-    var setDataDB = db.collection("data").document("next").collection("room")
-    var db_data_next = db.collection("data").document("next")
-    var checkName = ""
-    var dbTestCH = db.collection("data").document("next").collection("room").document("testCH")
-    var G_arrayUser = mutableListOf<Map<*, *>>()
-    val gkey = key()
-    var backCard = mutableListOf<String>("n", "n")
-    var card = mutableListOf<String>(
+    var db = FirebaseFirestore.getInstance() //TODO เอาไว้อ้างอิงไฟเบส
+    var setDataDB = db.collection("data").document("next").collection("room")   //TODO เอาไว้ระบุตำแหน่งไฟเบส
+    var db_data_next = db.collection("data").document("next")       //TODO เอาไว้ระบุตำแหน่งไฟเบส
+    var card = mutableListOf<String>(       //TODO เป็นตัวแปรเก็บค่ากาด
         "1fj", "2fj", "3fj", "4fj", "5fj", "6fj", "7fj", "8fj", "9fj", "10fj",
         "1kl", "2kl", "3kl", "4kl", "5kl", "6kl", "7kl", "8kl", "9kl", "10kl",
         "1pb", "2pb", "3pb", "4pb", "5pb", "6pb", "7pb", "8pb", "9pb", "10pb",
@@ -33,60 +28,36 @@ class Page1_Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page1_login)
         onClickInten()
-//        onTest()
-        //goToPage3_Test()
-        delete()
-//        val intent = Intent(this, Page3_GameUi::class.java)
-//        startActivity(intent)
-    }
-
-    //TODO delete
-    fun delete() {
-//        btnOk_Page1.setOnClickListener {
-//            dbTestCH.delete()
-//        }
     }
 
     //TODO onClickInten()
-    fun onTest() {
-        var abc = mutableListOf<Map<String, Any>>()
-        setDataDB.document("มาๆๆๆ").get().addOnSuccessListener {
-            var getUser = it.get("user") as MutableList<Map<String, Any>>
-            for (i in 0..getUser.size - 1) {
-                abc.add(getUser[i])
-                logdfix("getUser", "getUser[$i]: ${abc[i]}\n")
-            }
-        }
-    }
-
-    //TODO onClickInten()
-    fun onClickInten() {
+    fun onClickInten() {    //TODO เป็นฟังชั่น
         var backCard = mutableListOf<String>("n","n")
         btnOk_Page1.setOnClickListener {
-            var getStringEdt = edt_Page1_login.text.toString()
-            db_data_next.get().addOnSuccessListener { docs ->
-                if (!docs!!.exists()) {
-                    if (edt_Page1_login.text.toString() == "") {
+            var getStringEdt = edt_Page1_login.text.toString()      //TODO อ่านค่าจากช่องใส่ชื่อไปเก็บใน getstringedt
+            db_data_next.get().addOnSuccessListener { docs ->       //TODO เรียกดูค่าจากฐานข้อมูล db data next  docsตั่งชื่อไว้เข้าฐานข้อมูล
+                if (!docs!!.exists()) { //TODO ถ้าฐานขอมูลยังไม่มีข้อมูล
+                    if (edt_Page1_login.text.toString() == "") {    //TODO เช็คช่องใส่ชื่อมีข้อมูลไหมถ้าไม่มีให้ขึ้นข้อความ
                         toast("โปรดตั้งชื่อเพื่อเข้าร่วมเกม")
-                    } else {
-                        var userHashMap = hashMapOf<String, Any>(
+                    } else {            //TODO ถ้าช่องใส่ชื่อมีข้อมูล
+                        var userHashMap = hashMapOf<String, Any>(   //TODO เก็บลงฐานข้อมูลแบบเฉพราะ hashmap
                             "name" to getStringEdt,
                             "value" to 0,
                             "point" to 500,
                             "status" to "host",
                             "text" to "",
                             "card" to backCard)
-                        var a = mapOf<String, Any>("data" to "a")
-                        db_data_next.set(a)
+                        var a = mapOf<String, Any>("data" to "a")   //TODO mapofใช้ hashmap ก็ได้ ไปสร้างในฐานข้อมูลไว้ใน a
+                        db_data_next.set(a)         //TODO
                         val intent = Intent(this, Page2_CreatRoom::class.java)
-                        var cards = card as ArrayList<String>
-                        intent.putExtra("card", cards)
-                        intent.putExtra("userHashMap", userHashMap)
-                        intent.putExtra("checkName",getStringEdt)
-                        startActivity(intent)
+                        var cards = card as ArrayList<String>       //TODO นำข้อมูลใน card ไปเก็บมน cards แบบอาเร
+                        intent.putExtra("card", cards)        //TODO ส่งตัวแปร cards ไปไว้ในkey card
+                        intent.putExtra("userHashMap", userHashMap)     //TODO เป็นข้อมูลผู้เล่น
+                        intent.putExtra("checkName",getStringEdt)       //TODO เป็นชื่อของผู้เล่นในช่องใส่ชื่อ
+                        startActivity(intent)       //TODO เปลี่ยนไปหน้า creatroom
                     }
-                } else {
-                    if (edt_Page1_login.text.toString() == "") {
+                } else {                //TODO ถ้าในฐานข้อมูลมีข้อมูลแล้วจะมาเข้าอันนี้
+                    if (edt_Page1_login.text.toString() == "") {    //TODO ถ้าในกรอบยังไม่ใส่ข้อมูลจะขึ้นข้อความ
                         toast("โปรดตั้งชื่อเพื่อเข้าร่วมเกม")
                     } else {
                         var userHashMap = hashMapOf<String, Any>(
@@ -105,120 +76,6 @@ class Page1_Login : AppCompatActivity() {
             }
         }
     }
-
-    //TODO GO TO Page3
-//    fun goToPage3_Test() {
-//        var getArrayUser = mutableListOf<Map<*, *>>()
-//        btn_X.setOnClickListener { //TODO BTN_X
-//            checkName = "xaio"
-//            edt_Page1_login.setText("xaio")
-//            dbTestCH.get().addOnSuccessListener { docs ->
-//                if (docs!!.exists()) {
-//                    var arrayName = mutableListOf<Map<*, *>>(
-//                        mapOf(gkey.name to checkName,
-//                            gkey.status to "user",
-//                            gkey.point to 500,
-//                            gkey.value to 0,
-//                            gkey.text to "",
-//                            gkey.card to backCard),
-//                        mapOf(gkey.name to "AI_1",
-//                            gkey.status to "user",
-//                            gkey.point to 500,
-//                            gkey.value to 0,
-//                            gkey.text to "",
-//                            gkey.card to backCard),
-//                        mapOf(gkey.name to "AI_2",
-//                            gkey.status to "user",
-//                            gkey.point to 500,
-//                            gkey.value to 0,
-//                            gkey.text to "",
-//                            gkey.card to backCard)
-//                    )
-//                    getArrayUser.add(arrayName[0])
-//                    getArrayUser.add(arrayName[1])
-////                    getArrayUser.add(arrayName[2])
-//                    var getDocs = docs!!.get("user") as MutableList<Map<String, Any>>
-//                    for (doc in 0..getDocs.size - 1) {
-//                        getArrayUser.add(getDocs[doc])
-//                    }
-//                    var update = mapOf<String, Any>(
-//                        "user" to getArrayUser
-//                    )
-//                    dbTestCH.update(update).addOnSuccessListener {
-//                        var arrayNameIndex = arrayName as ArrayList
-//                        val intent = Intent(this, Page3_GameUi::class.java)
-//                        intent.putExtra("checkName", checkName)
-//                        intent.putExtra("userHashMap", arrayNameIndex)
-//                        startActivity(intent)
-//                    }
-//                } else {
-//                    var arrayName = mutableListOf<Map<*, *>>(
-//                        mapOf("name" to checkName,
-//                            "status" to "host")
-//                    )
-//                    var update = mapOf<String, Any>(
-//                        "user" to arrayName,
-//                        "sizeUser" to 3
-//                    )
-//                    dbTestCH.set(update).addOnSuccessListener {
-//                        val intent = Intent(this, Page3_GameUi::class.java)
-//                        intent.putExtra("checkName", checkName)
-//                        startActivity(intent)
-//                    }
-//                }
-//            }
-//        }
-//        //TODO BTN_N
-//        btn_N.setOnClickListener {
-//            checkName = "nubia"
-//            edt_Page1_login.setText("nubia")
-//            dbTestCH.get().addOnSuccessListener { docs ->
-//                if (docs!!.exists()) {
-//                    var arrayName = mutableListOf<Map<*, *>>(
-//                        mapOf("name" to checkName),
-//                        mapOf("name" to "AI")
-//                    )
-//                    getArrayUser.add(arrayName[0])
-//                    getArrayUser.add(arrayName[1])
-//                    var getDocs = docs!!.get("user") as MutableList<Map<String, Any>>
-//                    for (doc in 0..getDocs.size - 1) {
-//                        getArrayUser.add(getDocs[doc])
-//                    }
-//                    var update = mapOf<String, Any>(
-//                        "user" to getArrayUser
-//                    )
-//                    dbTestCH.update(update).addOnSuccessListener {
-//                        val intent = Intent(this, Page3_GameUi::class.java)
-//                        intent.putExtra("checkName", checkName)
-//                        startActivity(intent)
-//                    }
-//                } else {
-//                    var arrayName = mutableListOf<Map<*, *>>(
-//                        mapOf(gkey.name to checkName,
-//                            gkey.status to "host",
-//                            gkey.point to 500,
-//                            gkey.value to 0,
-//                            gkey.text to "",
-//                            gkey.card to backCard)
-//                    )
-//                    var update = mapOf<String, Any>(
-//                        gkey.user to arrayName,
-//                        "sizeUser" to 0,
-//                        gkey.round to 0,
-//                        gkey.state to 0,
-//                        gkey.card to card
-//                    )
-//                    var arrayNameIndex = arrayName as ArrayList
-//                    dbTestCH.set(update).addOnSuccessListener {
-//                        val intent = Intent(this, Page3_GameUi::class.java)
-//                        intent.putExtra("checkName", checkName)
-//                        intent.putExtra("userHashMap", arrayNameIndex)
-//                        startActivity(intent)
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     //TODO toast
     fun toast(a: String) {

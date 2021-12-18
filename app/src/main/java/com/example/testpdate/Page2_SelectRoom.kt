@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_page2_select_room.*
 
 class Page2_SelectRoom : AppCompatActivity() {
     var db = FirebaseFirestore.getInstance()
-    var sizePlayers = 0
     var getStringEdt = ""
     var G_dataUserArray = mutableListOf<Map<String, Any>>()
     var db_data_next_room = db.collection("data").document("next").collection("room")
@@ -23,14 +22,14 @@ class Page2_SelectRoom : AppCompatActivity() {
     }
 
     //TODO BTN_Back
-    fun btnBack() {
+    fun btnBack() { //TODO คำสั่งย้อนกลับก่อนหน้า
         btnBack_Page2_SelectRoom.setOnClickListener {
             finish()
         }
     }
 
     //TODO selectRoom
-    fun selectRoom() {
+    fun selectRoom() {  //TODO หน้าเข้าห้อง
         var bundle = intent.extras
         var getTextEdt = ""
         var getCheckName = bundle!!.getString("checkName") as String
@@ -38,7 +37,7 @@ class Page2_SelectRoom : AppCompatActivity() {
         db_data_next_room.addSnapshotListener { docs, error -> //TODO addSnapshot_RealTime
             if (docs!!.isEmpty) {
             } else {
-                var getDoc = docs!!.documents.get(0).get("roomName").toString()
+                var getDoc = docs!!.documents.get(0).get("roomName").toString()   //TODO เอาข้อมูลมาโชว์
                 textView_Page2_SelectRoom.text = getDoc
                 getTextEdt = textView_Page2_SelectRoom.text.toString()
             }
@@ -54,7 +53,7 @@ class Page2_SelectRoom : AppCompatActivity() {
                     }
                     G_dataUserArray.add(getUserMapPage1)
                     getStringEdt = textView_Page2_SelectRoom.text.toString()
-                    var updateDataUser = mapOf<String, Any>(
+                    var updateDataUser = mapOf<String, Any>(      //TODO
                         "user" to G_dataUserArray
                     )
                     db_data_next_room.document(getStringEdt).update(updateDataUser)

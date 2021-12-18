@@ -58,15 +58,8 @@ class Page3_GameUi : AppCompatActivity() {
     var cardUser4 = mutableListOf<String>()
     var mapData = mutableListOf<Map<*, *>>()
     var card = mutableListOf<String>()
-//    var card = mutableListOf<String>(
-//        "1fj", "2fj", "3fj", "4fj", "5fj", "6fj", "7fj", "8fj", "9fj", "10fj",
-//        "1kl", "2kl", "3kl", "4kl", "5kl", "6kl", "7kl", "8kl", "9kl", "10kl",
-//        "1pb", "2pb", "3pb", "4pb", "5pb", "6pb", "7pb", "8pb", "9pb", "10pb",
-//        "1pr", "2pr", "3pr", "4pr", "5pr", "6pr", "7pr", "8pr", "9pr", "10pr",
-//        "jfj", "jkl", "jpb", "jpr",
-//        "kfj", "kkl", "kpb", "kpr",
-//        "qfj", "qkl", "qpb", "qpr"
-//    )
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +71,7 @@ class Page3_GameUi : AppCompatActivity() {
         checkName = getCheckName
         gMe = getUserMapPage2
         logdfix("mapData", "mapData: $mapData")
-        btnNext_page3UI.isVisible = false
+        btnNext_page3UI.isVisible = false   //TODO สั่งปุ่มร่องหน
         //delete()
         checkStatus()
         begin()
@@ -98,7 +91,7 @@ class Page3_GameUi : AppCompatActivity() {
         }
     }
 
-    //TODO SetSizeUser
+    //TODO SetSizeUser เช็คในห้องมีกีคน
     fun begin() {
         btnGiveCard.isVisible = false
         db_data_next_room.document(gRoomName).addSnapshotListener { docs, error ->
@@ -127,14 +120,13 @@ class Page3_GameUi : AppCompatActivity() {
                 var getSizeUser = docs!!.get("user") as MutableList<HashMap<String, Any>>
                 ggetSize = getSizeUser.size
                 for (doc in getSizeUser) {
-                    if (gMe.isNotEmpty() && gUser2.isNotEmpty()) {
+                    if (gMe.isNotEmpty() && gUser2.isNotEmpty()) { //TODO ถ้าที่ง2คนนี้มีข้อมูลแล้วก็จะให้หยุดอ่านข้อมูล
                         logdfix("addUser", "IN")
                         return@addSnapshotListener
                     }
-                    if (doc.containsValue(gMe["name"].toString()) || doc.containsValue(gUser2["name"].toString()) || doc.containsValue(
-                            gUser3["name"].toString()) || doc.containsValue(gUser4["name"].toString())
-                    ) {
-                        if (!ArrayUser.contains(doc)) {
+                    if (doc.containsValue(gMe["name"].toString()) || doc.containsValue(gUser2["name"].toString()))//TODO เรียกkeyมาดูค่าในนี้ใีชื่อเราไหมถ้ามีให้ทำ
+                     {
+                        if (!ArrayUser.contains(doc)) { //TODO ต้องไม่มีชื่อกรุ
                             ArrayUser.add(doc)
                         }
                         logdfix("addUser", "name: ${doc["name"].toString()}")
