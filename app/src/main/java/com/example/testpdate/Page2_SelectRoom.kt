@@ -72,6 +72,7 @@ class Page2_SelectRoom : AppCompatActivity() {
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(applicationContext, text, duration)
         toast.show()
+        /////
     }
 
     //TODO Logdfix
