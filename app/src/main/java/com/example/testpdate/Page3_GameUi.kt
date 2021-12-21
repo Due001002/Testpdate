@@ -130,7 +130,8 @@ class Page3_GameUi : AppCompatActivity() {
                     //addUser3()
                     setUi()
                 } else if (sizeUser == 4) {
-                    addUser4()
+                    //addUser4()
+                    setUi()
                 }
             }
         }
@@ -566,17 +567,17 @@ class Page3_GameUi : AppCompatActivity() {
 
         if (ggetSize == 2) { //TODO SIZE == 2
             cardHost.clear()
-            cardUser2.clear()
+            cardUser4.clear()
             getCardDB.shuffle()
             cardHost.add(getCardDB[0])
             cardHost.add(getCardDB[1])
-            cardUser2.add(getCardDB[2])
-            cardUser2.add(getCardDB[3])
+            cardUser4.add(getCardDB[2])
+            cardUser4.add(getCardDB[3])
             var rsIdCardMe_1 = getCardString(cardHost[0])
             var rsIdCardMe_2 = getCardString(cardHost[1])
             var rsIdCardMe_3 = 0
-            var rsIdCardUser2_1 = getCardString(cardUser2[0])
-            var rsIdCardUser2_2 = getCardString(cardUser2[1])
+            var rsIdCardUser2_1 = getCardString(cardUser4[0])
+            var rsIdCardUser2_2 = getCardString(cardUser4[1])
             var rsIdCardUser2_3 = 0
             getCardDB.removeAt(0)
             getCardDB.removeAt(0)
@@ -595,13 +596,13 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name   to gUser2.get("name").toString(),
-                    gKey.value  to totalUser2,
-                    gKey.point  to gUser2.get("point").toString(),
-                    gKey.status to gUser2.get("status").toString(),
-                    gKey.text   to gUser2.get("text").toString(),
-                    gKey.id     to gUser2.get("id").toString().toInt(),
-                    gKey.card   to cardUser2
+                    gKey.name   to gUser4.get("name").toString(),
+                    gKey.value  to totalUser4,
+                    gKey.point  to gUser4.get("point").toString(),
+                    gKey.status to gUser4.get("status").toString(),
+                    gKey.text   to gUser4.get("text").toString(),
+                    gKey.id     to gUser4.get("id").toString().toInt(),
+                    gKey.card   to cardUser4
                 )
             )
 
@@ -613,25 +614,25 @@ class Page3_GameUi : AppCompatActivity() {
 
         } else if (ggetSize == 3) { //TODO SIZE == 3
             cardHost.clear()
-            cardUser2.clear()
             cardUser3.clear()
+            cardUser4.clear()
             getCardDB.shuffle()
             cardHost.add(getCardDB[0])
             cardHost.add(getCardDB[1])
-            cardUser2.add(getCardDB[2])
-            cardUser2.add(getCardDB[3])
-            cardUser3.add(getCardDB[4])
-            cardUser3.add(getCardDB[5])
+            cardUser3.add(getCardDB[2])
+            cardUser3.add(getCardDB[3])
+            cardUser4.add(getCardDB[4])
+            cardUser4.add(getCardDB[5])
 //        cardUser4.add(getCardDB[6])
 //        cardUser4.add(getCardDB[7])
             var rsIdCardMe_1 = getCardString(cardHost[0])
             var rsIdCardMe_2 = getCardString(cardHost[1])
             var rsIdCardMe_3 = 0
-            var rsIdCardUser2_1 = getCardString(cardUser2[0])
-            var rsIdCardUser2_2 = getCardString(cardUser2[1])
+            var rsIdCardUser2_1 = getCardString(cardUser3[0])
+            var rsIdCardUser2_2 = getCardString(cardUser3[1])
             var rsIdCardUser2_3 = 0
-            var rsIdCardUser3_1 = getCardString(cardUser3[0])
-            var rsIdCardUser3_2 = getCardString(cardUser3[1])
+            var rsIdCardUser3_1 = getCardString(cardUser4[0])
+            var rsIdCardUser3_2 = getCardString(cardUser4[1])
             var rsIdCardUser3_3 = 0
             getCardDB.removeAt(0)
             getCardDB.removeAt(0)
@@ -654,15 +655,6 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name   to gUser2.get("name").toString(),
-                    gKey.value  to totalUser2,
-                    gKey.point  to gUser2.get("point").toString(),
-                    gKey.status to gUser2.get("status").toString(),
-                    gKey.text   to gUser2.get("text").toString(),
-                    gKey.id     to gUser2.get("id").toString().toInt(),
-                    gKey.card   to cardUser2
-                ),
-                mapOf(
                     gKey.name   to gUser3.get("name").toString(),
                     gKey.value  to totalUser3,
                     gKey.point  to gUser3.get("point").toString(),
@@ -670,6 +662,15 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.text   to gUser3.get("text").toString(),
                     gKey.id     to gUser3.get("id").toString().toInt(),
                     gKey.card   to cardUser3
+                ),
+                mapOf(
+                    gKey.name   to gUser4.get("name").toString(),
+                    gKey.value  to totalUser4,
+                    gKey.point  to gUser4.get("point").toString(),
+                    gKey.status to gUser4.get("status").toString(),
+                    gKey.text   to gUser4.get("text").toString(),
+                    gKey.id     to gUser4.get("id").toString().toInt(),
+                    gKey.card   to cardUser4
                 )
             )
 
@@ -773,7 +774,7 @@ class Page3_GameUi : AppCompatActivity() {
             var getCard = result!!.get("card") as MutableList<String>
             if (getSize == 2) { //TODO size == 2
                 var cardHostGiveCard = cardHost
-                var cardUser2GiveCard = cardUser2
+                var cardUser4GiveCard = cardUser4
                 dbGiveCard.document(gMeName).get().addOnSuccessListener {
                     if (it.exists()) {
                         var stateGiveCard = it!!.get(gKey.giveCard).toString().toInt()
@@ -788,15 +789,15 @@ class Page3_GameUi : AppCompatActivity() {
                         logdfix("GiveCard", "No Data")
                     }
                 }.addOnSuccessListener {
-                    dbGiveCard.document(gUser2Name).get().addOnSuccessListener {
+                    dbGiveCard.document(gUser4Name).get().addOnSuccessListener {
                         if (it.exists()) {
                             var stateGiveCard = it!!.get(gKey.giveCard).toString().toInt()
                             if (stateGiveCard == 1) {
                                 var getvalueCard = getCardString(getCard[0])
                                 valuegUser2New = getvalueCard.value
-                                cardUser2GiveCard.add(getCard[0])
+                                cardUser4GiveCard.add(getCard[0])
                                 getCard.removeAt(0)
-                                logdfix("GiveCard", "cardUser2: $cardUser2GiveCard")
+                                logdfix("GiveCard", "cardUser2: $cardUser4GiveCard")
                             }
                         } else {
 
@@ -807,10 +808,10 @@ class Page3_GameUi : AppCompatActivity() {
                                 getUser[user][gKey.card] = cardHostGiveCard
                                 getUser[user][gKey.value] = calculatorValue(gMeValue, valuegMeNew)
                                 logdfix("GiveCard", "Host to user ${getUser[user]}")
-                            } else if (getUser[user].containsValue(gUser2Name)) {
-                                getUser[user][gKey.card] = cardUser2GiveCard
+                            } else if (getUser[user].containsValue(gUser4Name)) {
+                                getUser[user][gKey.card] = cardUser4GiveCard
                                 getUser[user][gKey.value] =
-                                    calculatorValue(gUser2Value, valuegUser2New)
+                                    calculatorValue(gUser4Value, valuegUser4New)
                                 logdfix("GiveCard", "gUser2Name to user ${getUser[user]}")
                             } else {
                                 logdfix("GiveCard", "for else: $user ")
@@ -827,8 +828,8 @@ class Page3_GameUi : AppCompatActivity() {
                 }
             } else if (getSize == 3) {  //TODO size == 3
                 var cardHostGiveCard = cardHost
-                var cardUser2GiveCard = cardUser2
                 var cardUser3GiveCard = cardUser3
+                var cardUser4GiveCard = cardUser4
                 dbGiveCard.document(gMeName).get().addOnSuccessListener {
                     if (it.exists()) {
                         var stateGiveCard = it!!.get(gKey.giveCard).toString().toInt()
@@ -841,25 +842,25 @@ class Page3_GameUi : AppCompatActivity() {
                     } else {
                         var a = 0 //TODO Me_ไม่ขอไพ่
                     }
-                    dbGiveCard.document(gUser2Name).get().addOnSuccessListener {
+                    dbGiveCard.document(gUser3Name).get().addOnSuccessListener {
                         if (it.exists()) {
                             var stateGiveCard = it!!.get(gKey.giveCard).toString().toInt()
                             if (stateGiveCard == 1) {
                                 var getvalueCard = getCardString(getCard[0])
-                                valuegUser2New = getvalueCard.value
-                                cardUser2GiveCard.add(getCard[0])
+                                valuegUser3New = getvalueCard.value
+                                cardUser3GiveCard.add(getCard[0])
                                 getCard.removeAt(0)
                             }
                         } else {
                             var a = 0 //TODO user2_ไม่ขอไพ่
                         }
-                        dbGiveCard.document(gUser3Name).get().addOnSuccessListener {
+                        dbGiveCard.document(gUser4Name).get().addOnSuccessListener {
                             if (it.exists()) {
                                 var stateGiveCard = it!!.get(gKey.giveCard).toString().toInt()
                                 if (stateGiveCard == 1) {
                                     var getvalueCard = getCardString(getCard[0])
-                                    valuegUser3New = getvalueCard.value
-                                    cardUser3GiveCard.add(getCard[0])
+                                    valuegUser4New = getvalueCard.value
+                                    cardUser4GiveCard.add(getCard[0])
                                     getCard.removeAt(0)
                                 }
                             } else {
@@ -872,15 +873,15 @@ class Page3_GameUi : AppCompatActivity() {
                                     getUser[user][gKey.value] =
                                         calculatorValue(gMeValue, valuegMeNew)
                                     logdfix("GiveCard", "Host to user ${getUser[user]}")
-                                } else if (getUser[user].containsValue(gUser2Name)) {
-                                    getUser[user][gKey.card] = cardUser2GiveCard
-                                    getUser[user][gKey.value] =
-                                        calculatorValue(gUser2Value, valuegUser2New)
-                                    logdfix("GiveCard", "gUser2Name to user ${getUser[user]}")
                                 } else if (getUser[user].containsValue(gUser3Name)) {
                                     getUser[user][gKey.card] = cardUser3GiveCard
                                     getUser[user][gKey.value] =
                                         calculatorValue(gUser3Value, valuegUser3New)
+                                    logdfix("GiveCard", "gUser2Name to user ${getUser[user]}")
+                                } else if (getUser[user].containsValue(gUser4Name)) {
+                                    getUser[user][gKey.card] = cardUser4GiveCard
+                                    getUser[user][gKey.value] =
+                                        calculatorValue(gUser4Value, valuegUser4New)
                                     logdfix("GiveCard", "gUser3Name to user ${getUser[user]}")
                                 } else {
                                     logdfix("GiveCard", "for else: $user ")
@@ -1011,17 +1012,17 @@ class Page3_GameUi : AppCompatActivity() {
 
         //TODO Calculator
         if (ggetSize == 2) { //TODO Size == 2
-            if (gMeValue > gUser2Value || gMeValue < gUser2Value || gMeValue == gUser2Value) {
-                if (gMeValue > gUser2Value) {
+            if (gMeValue > gUser4Value || gMeValue < gUser4Value || gMeValue == gUser4Value) {
+                if (gMeValue > gUser4Value) {
                     totalPointHost += 50
-                    totalPointUser2 -= 50
-                    textUser2 = lose
-                } else if (gMeValue < gUser2Value) {
+                    totalPointUser4 -= 50
+                    textUser4 = lose
+                } else if (gMeValue < gUser4Value) {
                     totalPointHost -= 50
-                    totalPointUser2 += 50
-                    textUser2 = win
-                } else if (gMeValue == gUser2Value) {
-                    textUser2 = draw
+                    totalPointUser4 += 50
+                    textUser4 = win
+                } else if (gMeValue == gUser4Value) {
+                    textUser4 = draw
                 }
             }
 
@@ -1036,13 +1037,13 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name   to gUser2.get("name").toString(),
-                    gKey.value  to gUser2Value,
+                    gKey.name   to gUser4.get("name").toString(),
+                    gKey.value  to gUser4Value,
                     gKey.point  to totalPointUser2,
-                    gKey.status to gUser2.get("status").toString(),
-                    gKey.text   to textUser2,
-                    gKey.id     to gUser2.get("id").toString().toInt(),
-                    gKey.card   to cardUser2
+                    gKey.status to gUser4.get("status").toString(),
+                    gKey.text   to textUser4,
+                    gKey.id     to gUser4.get("id").toString().toInt(),
+                    gKey.card   to cardUser4
                 )
             )
             var setDataCal = mapOf(
@@ -1051,17 +1052,17 @@ class Page3_GameUi : AppCompatActivity() {
             db_data_next_room.document(gRoomName).update(setDataCal)
 
         } else if (ggetSize == 3) { //TODO Size == 3
-            if (gMeValue > gUser2Value || gMeValue < gUser2Value || gMeValue == gUser2Value) {
-                if (gMeValue > gUser2Value) {
+            if (gMeValue > gUser4Value || gMeValue < gUser4Value || gMeValue == gUser4Value) {
+                if (gMeValue > gUser4Value) {
                     totalPointHost += 50
                     totalPointUser2 -= 50
-                    textUser2 = lose
-                } else if (gMeValue < gUser2Value) {
+                    textUser4 = lose
+                } else if (gMeValue < gUser4Value) {
                     totalPointHost -= 50
-                    totalPointUser2 += 50
-                    textUser2 = win
-                } else if (gMeValue == gUser2Value) {
-                    textUser2 = draw
+                    totalPointUser4 += 50
+                    textUser4 = win
+                } else if (gMeValue == gUser4Value) {
+                    textUser4 = draw
                 }
             }
 
@@ -1089,13 +1090,13 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name   to gUser2.get("name").toString(),
-                    gKey.value  to gUser2Value,
-                    gKey.point  to totalPointUser2,
-                    gKey.status to gUser2.get("status").toString(),
-                    gKey.text   to textUser2,
-                    gKey.id     to gUser2.get("id").toString().toInt(),
-                    gKey.card   to cardUser2
+                    gKey.name   to gUser4.get("name").toString(),
+                    gKey.value  to gUser4Value,
+                    gKey.point  to totalPointUser4,
+                    gKey.status to gUser4.get("status").toString(),
+                    gKey.text   to textUser4,
+                    gKey.id     to gUser4.get("id").toString().toInt(),
+                    gKey.card   to cardUser4
                 ),
                 mapOf(
                     gKey.name   to gUser3.get("name").toString(),
@@ -1215,12 +1216,12 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.name   to gUser4.get("name").toString(),
                     gKey.value  to 0,
-                    gKey.point  to gUser2Point,
-                    gKey.status to gUser2Status,
+                    gKey.point  to gUser4Point,
+                    gKey.status to gUser4Status,
                     gKey.text   to "",
-                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.id     to gUser4.get("id").toString().toInt(),
                     gKey.card   to backCard
                 )
             )
@@ -1242,12 +1243,12 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.name   to gUser4.get("name").toString(),
                     gKey.value  to 0,
-                    gKey.point  to gUser2Point,
-                    gKey.status to gUser2Status,
+                    gKey.point  to gUser4Point,
+                    gKey.status to gUser4Status,
                     gKey.text   to "",
-                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.id     to gUser4.get("id").toString().toInt(),
                     gKey.card   to backCard
                 ),
                 mapOf(
