@@ -15,10 +15,10 @@ class Page4_Sort : AppCompatActivity() {
     var db_data_next_room = db.collection("data").document("next").collection("room")
     var roomName = ""
     var getUserPage3 = mutableListOf<HashMap<String, Any>>(
-        hashMapOf("name" to "due", "point" to 100),
-        hashMapOf("name" to "xyz", "point" to 100),
-        hashMapOf("name" to "T_T", "point" to 200),
-        hashMapOf("name" to "GLTR", "point" to 600)
+//        hashMapOf("name" to "due", "point" to 100),
+//        hashMapOf("name" to "xyz", "point" to 100),
+//        hashMapOf("name" to "T_T", "point" to 200),
+//        hashMapOf("name" to "GLTR", "point" to 600)
     )
     var user = mutableListOf<HashMap<String, Any>>()
     var point = mutableListOf<Int>()
@@ -114,38 +114,41 @@ class Page4_Sort : AppCompatActivity() {
                 textView6.setText("${user.get(1).get("name")} : ${user.get(1).get("point")}")
             }
         } else if (ggetSize == 3) {
-            if (user.get(0).containsValue(user.get(1).get("point"))) { //TODO if 1
-                textView5.setText("${user.get(0).get("name")} / ${user.get(1).get("name")} :${user.get(0).get("point")}")
-            } else {
-                textView5.setText("${user.get(0).get("name")} :${user.get(0).get("point")}")
-            }
-            if (user.get(1).containsValue(user.get(2).get("point"))) { //TODO if 2
-                textView6.setText("${user.get(1).get("name")} / ${user.get(2).get("name")} :${user.get(1).get("point")}")
-            } else {
-                if (user.get(0).containsValue(user.get(1).get("point"))) {
+            if (true) {
+                if (user.get(0).containsValue(user.get(1).get("point")) && user.get(0).containsValue(user.get(2).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} / ${user.get(1).get("name")} / ${user.get(2).get("name")} :${user.get(0).get("point")}")
+                }else if (user.get(0).containsValue(user.get(1).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} / ${user.get(1).get("name")} :${user.get(0).get("point")}")
                     textView6.setText("${user.get(2).get("name")} :${user.get(2).get("point")}")
-                }else if (!user.get(1).containsValue(user.get(2).get("point"))) {
+                }else if (!user.get(0).containsValue(user.get(1).get("point")) && user.get(1).containsValue(user.get(2).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} :${user.get(0).get("point")}")
+                    textView6.setText("${user.get(1).get("name")} / ${user.get(2).get("name")} :${user.get(1).get("point")}")
+                }else if (!user.get(0).containsValue(user.get(1).get("point")) && !user.get(1).containsValue(user.get(2).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} :${user.get(0).get("point")}")
                     textView6.setText("${user.get(1).get("name")} :${user.get(1).get("point")}")
                     textView7.setText("${user.get(2).get("name")} :${user.get(2).get("point")}")
                 }
             }
         } else if (ggetSize == 4) {
-            if (user.get(0).containsValue(user.get(1).get("point"))) { //TODO if 1
-                textView5.setText("${user.get(0).get("name")} / ${user.get(1).get("name")} :${user.get(0).get("point")}")
-            } else {
-                textView5.setText("${user.get(0).get("name")} :${user.get(0).get("point")}")
-            }
-            if (user.get(1).containsValue(user.get(2).get("point"))) { //TODO if 2
-                textView6.setText("${user.get(1).get("name")} / ${user.get(2).get("name")} :${user.get(1).get("point")}")
-            } else {
-                textView6.setText("${user.get(1).get("name")} :${user.get(1).get("point")}")
-            }
-            if (user.get(2).containsValue(user.get(3).get("point"))) { //TODO if 3
-                textView7.setText("${user.get(2).get("name")} / ${user.get(3).get("name")} :${user.get(2).get("point")}")
-            } else {
-                if (user.get(1).containsValue(user.get(2).get("point"))) {
-                    textView7.setText("${user.get(3).get("name")} :${user.get(3).get("point")}")
-                }else if (!user.get(1).containsValue(user.get(2).get("point"))) {
+            if (true) {
+                if (user.get(0).containsValue(user.get(1).get("point")) && user.get(0).containsValue(user.get(2).get("point")) && user.get(0).containsValue(user.get(3).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} / ${user.get(1).get("name")} / ${user.get(2).get("name")} / ${user.get(2).get("name")} :${user.get(0).get("point")}")
+                }else if (user.get(0).containsValue(user.get(1).get("point")) && user.get(0).containsValue(user.get(2).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} / ${user.get(1).get("name")} / ${user.get(2).get("name")} :${user.get(0).get("point")}")
+                    textView6.setText("${user.get(3).get("name")} :${user.get(3).get("point")}")
+                }else if (user.get(0).containsValue(user.get(1).get("point"))  && user.get(2).containsValue(user.get(3).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} / ${user.get(1).get("name")} :${user.get(0).get("point")}")
+                    textView6.setText("${user.get(2).get("name")} / ${user.get(3).get("name")} :${user.get(2).get("point")}")
+                }else if (!user.get(0).containsValue(user.get(1).get("point")) && user.get(1).containsValue(user.get(2).get("point")) && user.get(1).containsValue(user.get(3).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} :${user.get(0).get("point")}")
+                    textView6.setText("${user.get(1).get("name")} / ${user.get(2).get("name")} / ${user.get(3).get("name")} :${user.get(1).get("point")}")
+                }else if (!user.get(0).containsValue(user.get(1).get("point")) && !user.get(1).containsValue(user.get(2).get("point")) && user.get(2).containsValue(user.get(3).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} :${user.get(0).get("point")}")
+                    textView6.setText("${user.get(1).get("name")} :${user.get(1).get("point")}")
+                    textView7.setText("${user.get(2).get("name")} / ${user.get(3).get("name")} :${user.get(2).get("point")}")
+                }else if (!user.get(0).containsValue(user.get(1).get("point")) && !user.get(1).containsValue(user.get(2).get("point")) && !user.get(2).containsValue(user.get(3).get("point"))) {
+                    textView5.setText("${user.get(0).get("name")} :${user.get(0).get("point")}")
+                    textView6.setText("${user.get(1).get("name")} :${user.get(1).get("point")}")
                     textView7.setText("${user.get(2).get("name")} :${user.get(2).get("point")}")
                     textView8.setText("${user.get(3).get("name")} :${user.get(3).get("point")}")
                 }

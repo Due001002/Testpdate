@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/creat_room"
+    android:background="@drawable/create"
     tools:context=".Page2_CreatRoom">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
             android:id="@+id/btnBack_page2_CreatRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="260dp"
+            android:layout_marginStart="275dp"
             android:background="#C8FFEB3B"
             android:text="ย้อนกลับ"
             app:layout_constraintBottom_toBottomOf="parent"
