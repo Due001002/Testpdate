@@ -57,10 +57,10 @@ class Page3_GameUi : AppCompatActivity() {
     var cardUser3 = mutableListOf<String>()
     var cardUser4 = mutableListOf<String>()
     var mapData = mutableListOf<Map<*, *>>()
-    var ID1 = mutableListOf<Int>(1,2,3,4)
-    var ID2 = mutableListOf<Int>(2,3,4,1)
-    var ID3 = mutableListOf<Int>(3,4,1,2)
-    var ID4 = mutableListOf<Int>(4,1,2,3)
+    var ID1 = mutableListOf<Int>(1,4,3,2)
+    var ID2 = mutableListOf<Int>(2,1,4,3)
+    var ID3 = mutableListOf<Int>(3,2,1,4)
+    var ID4 = mutableListOf<Int>(4,3,2,1)
     var setID = mutableListOf<Int>()
     var ID = 0
     var card = mutableListOf<String>()
@@ -86,6 +86,17 @@ class Page3_GameUi : AppCompatActivity() {
         gMe = getUserMapPage2
         logdfix("mapData", "mapData: $mapData")
         btnNext_page3UI.isVisible = false
+        if (ID == 1 || ID == 2 || ID == 3 || ID == 4) { //TODO Check ID
+            if (ID == 1) {
+                setID = ID1
+            }else if (ID == 2) {
+                setID = ID2
+            }else if (ID == 3) {
+                setID = ID3
+            }else if (ID == 4) {
+                setID = ID4
+            }
+        }
         //delete()
         checkStatus()
         begin()
@@ -113,11 +124,9 @@ class Page3_GameUi : AppCompatActivity() {
                 var sizeUser = docs!!.get("sizeUser").toString().toInt()
                 logdfix("aaa", "sizeUser: $sizeUser")
                 if (sizeUser == 2) {
-                    l2.isVisible = false
-                    l3.isVisible = false
-                    addUser2()
+//                    addUser2()
+                    setUi()
                 } else if (sizeUser == 3) {
-                    l2.isVisible = false
                     //addUser3()
                     setUi()
                 } else if (sizeUser == 4) {
@@ -135,6 +144,7 @@ class Page3_GameUi : AppCompatActivity() {
                 var getSizeUser = docs!!.get("user") as MutableList<HashMap<String, Any>>
                 ggetSize = getSizeUser.size
                 for (doc in getSizeUser) {
+                    logdfix("addUser", "-------------")
                     logdfix("addUser", "name: ${doc}")
                     if (gMe.isNotEmpty() && gUser2.isNotEmpty()) {
                         logdfix("addUser", "IN")
@@ -144,7 +154,7 @@ class Page3_GameUi : AppCompatActivity() {
                         if (!ArrayUser.contains(doc)) {
                             ArrayUser.add(doc)
                         }
-                    } else if (gUser2.isEmpty()) {
+                    } else if (gUser2.isEmpty() && doc.containsValue(setID[1])) {
                         gUser2 = doc
                     }
                     logdfix("addUser", "ME: ${gMe["name"].toString()}")
@@ -206,6 +216,8 @@ class Page3_GameUi : AppCompatActivity() {
                 var getSizeUser = docs!!.get("user") as MutableList<HashMap<String, Any>>
                 ggetSize = getSizeUser.size
                 for (doc in getSizeUser) {
+                    logdfix("addUser", "-------------")
+                    logdfix("addUser", "name: ${doc}")
                     if (gMe.isNotEmpty() && gUser2.isNotEmpty() && gUser3.isNotEmpty() && gUser4.isNotEmpty()) {
                         logdfix("addUser", "IN")
                         return@addSnapshotListener
@@ -245,17 +257,6 @@ class Page3_GameUi : AppCompatActivity() {
                     btnNext_page3UI.isVisible = true
                 }
             }
-            if (ID == 1 || ID == 2 || ID == 3 || ID == 4) { //TODO Check ID
-                if (ID == 1) {
-                    setID = ID1
-                }else if (ID == 2) {
-                    setID = ID2
-                }else if (ID == 3) {
-                    setID = ID3
-                }else if (ID == 4) {
-                    setID = ID4
-                }
-            }
 
             if (docs!!.exists()) { // TODO SET UI
                 var getSizeUser = docs!!.get("user") as MutableList<HashMap<String, Any>>
@@ -264,8 +265,9 @@ class Page3_GameUi : AppCompatActivity() {
                 time  = docs!!.get(gKey.time).toString().toInt()
                 ggetSize = getSizeUser.size
                 for (doc in getSizeUser) {
+                    var getDoc = doc.get("id").toString().toInt()
                     var getCard = doc!!.get("card") as MutableList<String>
-                    if (doc.containsValue(gMe["name"].toString())) { //TODO gMe
+                    if (getDoc.equals(setID[0])) { //TODO gMe
                         gMe = doc
                         gMeName = doc.get(gKey.name).toString()
                         gMeValue = doc.get("value").toString().toInt()
@@ -353,46 +355,47 @@ class Page3_GameUi : AppCompatActivity() {
                         if (round == 5) {
                             sendDataToPage4()
                         }
-                    } else if (doc.containsValue(gUser2["name"].toString())) { //TODO user2
-                        gUser4 = doc
-                        gUser4Name = doc["name"].toString()
-                        gUser4Point = doc["point"].toString().toInt()
-                        gUser4Value = doc.get("value").toString().toInt()
-                        gUser4Status = doc.get("status").toString()
-                        if (gUser4Status == "host") {
-                            txtName2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
-                            txtPoint2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
-                            txtStatus2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
+                    }  else if (getDoc.equals(setID[1])) {  //TODO user2
+                        gUser2 = doc
+                        gUser2Name = doc["name"].toString()
+                        gUser2Point = doc["point"].toString().toInt()
+                        gUser2Value = doc.get("value").toString().toInt()
+                        gUser2Status = doc.get("status").toString()
+                        if (gUser2Status == "host") {
+                            txtName4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
+                            txtPoint4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
+                            txtStatus4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                         }
                         var text = doc.get("text").toString()
-                        txtName2_page3UI.setText("${gUser4Name}")
-                        txtPoint2_page3UI.setText("คะแนน: ${gUser4Point}")
-                        txtStatus2_page3UI.setText("$text")
-                        if (gUser4Value == 8 || gUser4Value == 9) {
-                            if (getCard.size == 2) {
-                                imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                                imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
-                            } else {
-                                imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                                imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                imgView2_3_page3UI.setImageResource(getCardShow(getCard[2]))
-                                txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
-                            }
+                        txtName4_page3UI.setText("${gUser2Name}")
+                        txtPoint4_page3UI.setText("Point: ${gUser2Point}")
+                        txtStatus4_page3UI.setText("$text")
 
+                        if (gUser2Value == 8 || gUser2Value == 9) {
+                            if (getCard.size == 2) {
+                                txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
+                                imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                                imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                            } else {
+                                txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
+                                imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                                imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                                imgView4_3_page3UI.setImageResource(getCardShow(getCard[2]))
+                            }
                         }
                         if (stage >= 3) {
-                            txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
-                            txtPoint2_page3UI.setText("คะแนน: ${gUser4Point}")
-                            imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                            imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                            txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
+                            txtPoint4_page3UI.setText("คะแนน: ${gUser2Point}")
+                            imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                            imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
+
                             if (getCard.size == 3) {
-                                imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                                imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                imgView2_3_page3UI.setImageResource(getCardShow(getCard[2]))
+                                imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                                imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                                imgView4_3_page3UI.setImageResource(getCardShow(getCard[2]))
                             }
                         }
-                    } else if (doc.containsValue(gUser3["name"].toString())) { //TODO user3
+                    } else if (getDoc.equals(setID[2])) { //TODO user3
                         gUser3 = doc
                         gUser3Name = doc["name"].toString()
                         gUser3Point = doc["point"].toString().toInt()
@@ -431,44 +434,43 @@ class Page3_GameUi : AppCompatActivity() {
                                 imgView3_3_page3UI.setImageResource(getCardShow(getCard[2]))
                             }
                         }
-                    } else if (doc.containsValue(gUser4["name"].toString())) {  //TODO user4
-                        gUser2 = doc
-                        gUser2Name = doc["name"].toString()
-                        gUser2Point = doc["point"].toString().toInt()
-                        gUser2Value = doc.get("value").toString().toInt()
-                        gUser2Status = doc.get("status").toString()
-                        if (gUser2Status == "host") {
-                            txtName4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
-                            txtPoint4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
-                            txtStatus4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
+                    } else if (getDoc.equals(setID[3])) { //TODO user4
+                        gUser4 = doc
+                        gUser4Name = doc["name"].toString()
+                        gUser4Point = doc["point"].toString().toInt()
+                        gUser4Value = doc.get("value").toString().toInt()
+                        gUser4Status = doc.get("status").toString()
+                        if (gUser4Status == "host") {
+                            txtName2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
+                            txtPoint2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
+                            txtStatus2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                         }
                         var text = doc.get("text").toString()
-                        txtName4_page3UI.setText("${gUser2Name}")
-                        txtPoint4_page3UI.setText("Point: ${gUser2Point}")
-                        txtStatus4_page3UI.setText("$text")
-
-                        if (gUser2Value == 8 || gUser2Value == 9) {
+                        txtName2_page3UI.setText("${gUser4Name}")
+                        txtPoint2_page3UI.setText("คะแนน: ${gUser4Point}")
+                        txtStatus2_page3UI.setText("$text")
+                        if (gUser4Value == 8 || gUser4Value == 9) {
                             if (getCard.size == 2) {
-                                txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
-                                imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                                imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                                imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                                imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                                txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
                             } else {
-                                txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
-                                imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                                imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                imgView4_3_page3UI.setImageResource(getCardShow(getCard[2]))
+                                imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                                imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                                imgView2_3_page3UI.setImageResource(getCardShow(getCard[2]))
+                                txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
                             }
+
                         }
                         if (stage >= 3) {
-                            txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
-                            txtPoint4_page3UI.setText("คะแนน: ${gUser2Point}")
-                            imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                            imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
-
+                            txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
+                            txtPoint2_page3UI.setText("คะแนน: ${gUser4Point}")
+                            imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                            imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
                             if (getCard.size == 3) {
-                                imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
-                                imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                imgView4_3_page3UI.setImageResource(getCardShow(getCard[2]))
+                                imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
+                                imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
+                                imgView2_3_page3UI.setImageResource(getCardShow(getCard[2]))
                             }
                         }
                     }
@@ -584,20 +586,22 @@ class Page3_GameUi : AppCompatActivity() {
             totalUser2 = calculatorValue(rsIdCardUser2_1.value, rsIdCardUser2_2.value)
             var updateUser1 = mutableListOf<Map<Any, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to totalHost,
-                    gKey.point to gMe.get("point").toString(),
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to totalHost,
+                    gKey.point  to gMe.get("point").toString(),
                     gKey.status to gMe.get("status").toString(),
-                    gKey.text to jao,
-                    gKey.card to cardHost
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to totalUser2,
-                    gKey.point to gUser2.get("point").toString(),
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to totalUser2,
+                    gKey.point  to gUser2.get("point").toString(),
                     gKey.status to gUser2.get("status").toString(),
-                    gKey.text to gUser2.get("text").toString(),
-                    gKey.card to cardUser2
+                    gKey.text   to gUser2.get("text").toString(),
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to cardUser2
                 )
             )
 
@@ -641,28 +645,31 @@ class Page3_GameUi : AppCompatActivity() {
 
             var updateUser1 = mutableListOf<Map<Any, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to totalHost,
-                    gKey.point to gMe.get("point").toString(),
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to totalHost,
+                    gKey.point  to gMe.get("point").toString(),
                     gKey.status to gMe.get("status").toString(),
-                    gKey.text to jao,
-                    gKey.card to cardHost
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to totalUser2,
-                    gKey.point to gUser2.get("point").toString(),
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to totalUser2,
+                    gKey.point  to gUser2.get("point").toString(),
                     gKey.status to gUser2.get("status").toString(),
-                    gKey.text to gUser2.get("text").toString(),
-                    gKey.card to cardUser2
+                    gKey.text   to gUser2.get("text").toString(),
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to cardUser2
                 ),
                 mapOf(
-                    gKey.name to gUser3.get("name").toString(),
-                    gKey.value to totalUser3,
-                    gKey.point to gUser3.get("point").toString(),
+                    gKey.name   to gUser3.get("name").toString(),
+                    gKey.value  to totalUser3,
+                    gKey.point  to gUser3.get("point").toString(),
                     gKey.status to gUser3.get("status").toString(),
-                    gKey.text to gUser3.get("text").toString(),
-                    gKey.card to cardUser3
+                    gKey.text   to gUser3.get("text").toString(),
+                    gKey.id     to gUser3.get("id").toString().toInt(),
+                    gKey.card   to cardUser3
                 )
             )
 
@@ -708,36 +715,40 @@ class Page3_GameUi : AppCompatActivity() {
 
             var updateUser1 = mutableListOf<Map<Any, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to totalHost,
-                    gKey.point to gMe.get("point").toString(),
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to totalHost,
+                    gKey.point  to gMe.get("point").toString(),
                     gKey.status to gMe.get("status").toString(),
-                    gKey.text to jao,
-                    gKey.card to cardHost
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to totalUser2,
-                    gKey.point to gUser2.get("point").toString(),
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to totalUser2,
+                    gKey.point  to gUser2.get("point").toString(),
                     gKey.status to gUser2.get("status").toString(),
-                    gKey.text to gUser2.get("text").toString(),
-                    gKey.card to cardUser2
+                    gKey.text   to gUser2.get("text").toString(),
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to cardUser2
                 ),
                 mapOf(
-                    gKey.name to gUser3.get("name").toString(),
-                    gKey.value to totalUser3,
-                    gKey.point to gUser3.get("point").toString(),
+                    gKey.name   to gUser3.get("name").toString(),
+                    gKey.value  to totalUser3,
+                    gKey.point  to gUser3.get("point").toString(),
                     gKey.status to gUser3.get("status").toString(),
-                    gKey.text to gUser3.get("text").toString(),
-                    gKey.card to cardUser3
+                    gKey.text   to gUser3.get("text").toString(),
+                    gKey.id     to gUser3.get("id").toString().toInt(),
+                    gKey.card   to cardUser3
                 ),
                 mapOf(
-                    gKey.name to gUser4.get("name").toString(),
-                    gKey.value to totalUser4,
-                    gKey.point to gUser4.get("point").toString(),
+                    gKey.name   to gUser4.get("name").toString(),
+                    gKey.value  to totalUser4,
+                    gKey.point  to gUser4.get("point").toString(),
                     gKey.status to gUser4.get("status").toString(),
-                    gKey.text to gUser4.get("text").toString(),
-                    gKey.card to cardUser4
+                    gKey.text   to gUser4.get("text").toString(),
+                    gKey.id     to gUser4.get("id").toString().toInt(),
+                    gKey.card   to cardUser4
                 )
             )
 
@@ -1016,20 +1027,22 @@ class Page3_GameUi : AppCompatActivity() {
 
             var updateDataUser = listOf<Map<String, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to gMeValue,
-                    gKey.point to totalPointHost,
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to gMeValue,
+                    gKey.point  to totalPointHost,
                     gKey.status to gMe.get("status").toString(),
-                    gKey.text to jao,
-                    gKey.card to cardHost
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to gUser2Value,
-                    gKey.point to totalPointUser2,
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to gUser2Value,
+                    gKey.point  to totalPointUser2,
                     gKey.status to gUser2.get("status").toString(),
-                    gKey.text to textUser2,
-                    gKey.card to cardUser2
+                    gKey.text   to textUser2,
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to cardUser2
                 )
             )
             var setDataCal = mapOf(
@@ -1067,28 +1080,31 @@ class Page3_GameUi : AppCompatActivity() {
             }
             var updateDataUser = listOf<Map<String, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to gMeValue,
-                    gKey.point to totalPointHost,
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to gMeValue,
+                    gKey.point  to totalPointHost,
                     gKey.status to gMe.get("status").toString(),
-                    gKey.text to jao,
-                    gKey.card to cardHost
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to gUser2Value,
-                    gKey.point to totalPointUser2,
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to gUser2Value,
+                    gKey.point  to totalPointUser2,
                     gKey.status to gUser2.get("status").toString(),
-                    gKey.text to textUser2,
-                    gKey.card to cardUser2
+                    gKey.text   to textUser2,
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to cardUser2
                 ),
                 mapOf(
-                    gKey.name to gUser3.get("name").toString(),
-                    gKey.value to gUser3Value,
-                    gKey.point to totalPointUser3,
+                    gKey.name   to gUser3.get("name").toString(),
+                    gKey.value  to gUser3Value,
+                    gKey.point  to totalPointUser3,
                     gKey.status to gUser3.get("status").toString(),
-                    gKey.text to textUser3,
-                    gKey.card to cardUser3
+                    gKey.text   to textUser3,
+                    gKey.id     to gUser3.get("id").toString().toInt(),
+                    gKey.card   to cardUser3
                 )
             )
             var setDataCal = mapOf(
@@ -1141,36 +1157,40 @@ class Page3_GameUi : AppCompatActivity() {
 
             var updateDataUser = listOf<Map<String, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to gMeValue,
-                    gKey.point to totalPointHost,
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to gMeValue,
+                    gKey.point  to totalPointHost,
                     gKey.status to gMe.get("status").toString(),
-                    gKey.text to jao,
-                    gKey.card to cardHost
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to gUser2Value,
-                    gKey.point to totalPointUser2,
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to gUser2Value,
+                    gKey.point  to totalPointUser2,
                     gKey.status to gUser2.get("status").toString(),
-                    gKey.text to textUser2,
-                    gKey.card to cardUser2
+                    gKey.text   to textUser2,
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to cardUser2
                 ),
                 mapOf(
-                    gKey.name to gUser3.get("name").toString(),
-                    gKey.value to gUser3Value,
-                    gKey.point to totalPointUser3,
+                    gKey.name   to gUser3.get("name").toString(),
+                    gKey.value  to gUser3Value,
+                    gKey.point  to totalPointUser3,
                     gKey.status to gUser3.get("status").toString(),
-                    gKey.text to textUser3,
-                    gKey.card to cardUser3
+                    gKey.text   to textUser3,
+                    gKey.id     to gUser3.get("id").toString().toInt(),
+                    gKey.card   to cardUser3
                 ),
                 mapOf(
-                    gKey.name to gUser4.get("name").toString(),
-                    gKey.value to gUser4Value,
-                    gKey.point to totalPointUser4,
+                    gKey.name   to gUser4.get("name").toString(),
+                    gKey.value  to gUser4Value,
+                    gKey.point  to totalPointUser4,
                     gKey.status to gUser3.get("status").toString(),
-                    gKey.text to textUser4,
-                    gKey.card to cardUser4
+                    gKey.text   to textUser4,
+                    gKey.id     to gUser4.get("id").toString().toInt(),
+                    gKey.card   to cardUser4
                 )
             )
             var setDataCal = mapOf(
@@ -1186,20 +1206,22 @@ class Page3_GameUi : AppCompatActivity() {
         if (ggetSize == 2) { //TODO SIZE == 2
             var updateDataUser = listOf<Map<String, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gMePoint,
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gMePoint,
                     gKey.status to gMeStatus,
-                    gKey.text to jao,
-                    gKey.card to backCard
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gUser2Point,
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gUser2Point,
                     gKey.status to gUser2Status,
-                    gKey.text to "",
-                    gKey.card to backCard
+                    gKey.text   to "",
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 )
             )
             var setupDataUser = mapOf(
@@ -1211,28 +1233,31 @@ class Page3_GameUi : AppCompatActivity() {
         }else if (ggetSize == 3) { //TODO SIZE == 3
             var updateDataUser = listOf<Map<String, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gMePoint,
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gMePoint,
                     gKey.status to gMeStatus,
-                    gKey.text to jao,
-                    gKey.card to backCard
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gUser2Point,
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gUser2Point,
                     gKey.status to gUser2Status,
-                    gKey.text to "",
-                    gKey.card to backCard
+                    gKey.text   to "",
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name to gUser3.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gUser3Point,
+                    gKey.name   to gUser3.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gUser3Point,
                     gKey.status to gUser3Status,
-                    gKey.text to "",
-                    gKey.card to backCard
+                    gKey.text   to "",
+                    gKey.id     to gUser3.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 )
             )
             var setupDataUser = mapOf(
@@ -1243,36 +1268,40 @@ class Page3_GameUi : AppCompatActivity() {
         } else if (ggetSize == 4) { //TODO SIZE == 4
             var updateDataUser = listOf<Map<String, Any>>(
                 mapOf(
-                    gKey.name to gMe.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gMePoint,
+                    gKey.name   to gMe.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gMePoint,
                     gKey.status to gMeStatus,
-                    gKey.text to jao,
-                    gKey.card to backCard
+                    gKey.text   to jao,
+                    gKey.id     to gMe.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name to gUser2.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gUser2Point,
+                    gKey.name   to gUser2.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gUser2Point,
                     gKey.status to gUser2Status,
-                    gKey.text to "",
-                    gKey.card to backCard
+                    gKey.text   to "",
+                    gKey.id     to gUser2.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name to gUser3.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gUser3Point,
+                    gKey.name   to gUser3.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gUser3Point,
                     gKey.status to gUser3Status,
-                    gKey.text to "",
-                    gKey.card to backCard
+                    gKey.text   to "",
+                    gKey.id     to gUser3.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 ),
                 mapOf(
-                    gKey.name to gUser4.get("name").toString(),
-                    gKey.value to 0,
-                    gKey.point to gUser4Point,
+                    gKey.name   to gUser4.get("name").toString(),
+                    gKey.value  to 0,
+                    gKey.point  to gUser4Point,
                     gKey.status to gUser4Status,
-                    gKey.text to "",
-                    gKey.card to backCard
+                    gKey.text   to "",
+                    gKey.id     to gUser4.get("id").toString().toInt(),
+                    gKey.card   to backCard
                 )
             )
             var setupDataUser = mapOf(
