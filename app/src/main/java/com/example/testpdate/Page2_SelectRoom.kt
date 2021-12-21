@@ -35,6 +35,7 @@ class Page2_SelectRoom : AppCompatActivity() {
         var getTextEdt = ""
         var getCheckName = bundle!!.getString("checkName") as String
         var getUserMapPage1 = bundle!!.get("userHashMap") as HashMap<String, Any>
+        var getID = bundle!!.get("id") as Int
         db_data_next_room.addSnapshotListener { docs, error -> //TODO addSnapshot_RealTime
             if (docs!!.isEmpty) {
             } else {
@@ -47,23 +48,24 @@ class Page2_SelectRoom : AppCompatActivity() {
 //            var abc = mutableListOf<Map<String,Any>>()
             var getText = textView_Page2_SelectRoom.text.toString()
             db_data_next_room.document(getText).get().addOnSuccessListener { //TODO GetData_Once
-                    var getUser = it.get("user") as MutableList<Map<String, Any>>
-                    for (i in 0..getUser.size - 1) {
-                        G_dataUserArray.add(getUser[i])
+                var getUser = it.get("user") as MutableList<Map<String, Any>>
+                for (i in 0..getUser.size - 1) {
+                    G_dataUserArray.add(getUser[i])
 //                    logdfix("getUser","getUser[$i]: ${abc[i]}\n")
-                    }
-                    G_dataUserArray.add(getUserMapPage1)
-                    getStringEdt = textView_Page2_SelectRoom.text.toString()
-                    var updateDataUser = mapOf<String, Any>(
-                        "user" to G_dataUserArray
-                    )
-                    db_data_next_room.document(getStringEdt).update(updateDataUser)
-                    var intent = Intent(this, Page3_GameUi::class.java)
-                    intent.putExtra("userHashMap", getUserMapPage1)
-                    intent.putExtra("checkName",getCheckName)
-                    intent.putExtra("roomNamePage2_SelectRoom",getText)
-                    startActivity(intent)
                 }
+                G_dataUserArray.add(getUserMapPage1)
+                getStringEdt = textView_Page2_SelectRoom.text.toString()
+                var updateDataUser = mapOf<String, Any>(
+                    "user" to G_dataUserArray
+                )
+                db_data_next_room.document(getStringEdt).update(updateDataUser)
+                var intent = Intent(this, Page3_GameUi::class.java)
+                intent.putExtra("userHashMap", getUserMapPage1)
+                intent.putExtra("checkName", getCheckName)
+                intent.putExtra("roomNamePage2_SelectRoom", getText)
+                intent.putExtra("id", getID)
+                startActivity(intent)
+            }
         }
     }
 

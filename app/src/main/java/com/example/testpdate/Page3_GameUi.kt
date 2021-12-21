@@ -57,6 +57,12 @@ class Page3_GameUi : AppCompatActivity() {
     var cardUser3 = mutableListOf<String>()
     var cardUser4 = mutableListOf<String>()
     var mapData = mutableListOf<Map<*, *>>()
+    var ID1 = mutableListOf<Int>(1,2,3,4)
+    var ID2 = mutableListOf<Int>(2,3,4,1)
+    var ID3 = mutableListOf<Int>(3,4,1,2)
+    var ID4 = mutableListOf<Int>(4,1,2,3)
+    var setID = mutableListOf<Int>()
+    var ID = 0
     var card = mutableListOf<String>()
 //    var card = mutableListOf<String>(
 //        "1fj", "2fj", "3fj", "4fj", "5fj", "6fj", "7fj", "8fj", "9fj", "10fj",
@@ -71,10 +77,11 @@ class Page3_GameUi : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page3_game_ui)
-//        mapData.add(getUserMapPage2[0])
+//      mapData.add(getUserMapPage2[0])
         var bundle = intent.extras
         var getCheckName = bundle!!.getString("checkName") as String
         var getUserMapPage2 = bundle!!.get("userHashMap") as HashMap<String, Any>
+            ID = bundle!!.getInt("id")
         checkName = getCheckName
         gMe = getUserMapPage2
         logdfix("mapData", "mapData: $mapData")
@@ -106,12 +113,13 @@ class Page3_GameUi : AppCompatActivity() {
                 var sizeUser = docs!!.get("sizeUser").toString().toInt()
                 logdfix("aaa", "sizeUser: $sizeUser")
                 if (sizeUser == 2) {
+                    l2.isVisible = false
                     l3.isVisible = false
-                    l4.isVisible = false
                     addUser2()
                 } else if (sizeUser == 3) {
-                    l4.isVisible = false
-                    addUser3()
+                    l2.isVisible = false
+                    //addUser3()
+                    setUi()
                 } else if (sizeUser == 4) {
                     addUser4()
                 }
@@ -127,17 +135,15 @@ class Page3_GameUi : AppCompatActivity() {
                 var getSizeUser = docs!!.get("user") as MutableList<HashMap<String, Any>>
                 ggetSize = getSizeUser.size
                 for (doc in getSizeUser) {
+                    logdfix("addUser", "name: ${doc}")
                     if (gMe.isNotEmpty() && gUser2.isNotEmpty()) {
                         logdfix("addUser", "IN")
                         return@addSnapshotListener
                     }
-                    if (doc.containsValue(gMe["name"].toString()) || doc.containsValue(gUser2["name"].toString()) || doc.containsValue(
-                            gUser3["name"].toString()) || doc.containsValue(gUser4["name"].toString())
-                    ) {
+                    if (doc.containsValue(gMe["name"].toString()) || doc.containsValue(gUser2["name"].toString())){
                         if (!ArrayUser.contains(doc)) {
                             ArrayUser.add(doc)
                         }
-                        logdfix("addUser", "name: ${doc["name"].toString()}")
                     } else if (gUser2.isEmpty()) {
                         gUser2 = doc
                     }
@@ -239,8 +245,19 @@ class Page3_GameUi : AppCompatActivity() {
                     btnNext_page3UI.isVisible = true
                 }
             }
+            if (ID == 1 || ID == 2 || ID == 3 || ID == 4) { //TODO Check ID
+                if (ID == 1) {
+                    setID = ID1
+                }else if (ID == 2) {
+                    setID = ID2
+                }else if (ID == 3) {
+                    setID = ID3
+                }else if (ID == 4) {
+                    setID = ID4
+                }
+            }
 
-            if (docs!!.exists()) {
+            if (docs!!.exists()) { // TODO SET UI
                 var getSizeUser = docs!!.get("user") as MutableList<HashMap<String, Any>>
                 round = docs!!.get(gKey.round).toString().toInt()
                 stage = docs!!.get(gKey.stage).toString().toInt()
@@ -337,36 +354,36 @@ class Page3_GameUi : AppCompatActivity() {
                             sendDataToPage4()
                         }
                     } else if (doc.containsValue(gUser2["name"].toString())) { //TODO user2
-                        gUser2 = doc
-                        gUser2Name = doc["name"].toString()
-                        gUser2Point = doc["point"].toString().toInt()
-                        gUser2Value = doc.get("value").toString().toInt()
-                        gUser2Status = doc.get("status").toString()
-                        if (gUser2Status == "host") {
+                        gUser4 = doc
+                        gUser4Name = doc["name"].toString()
+                        gUser4Point = doc["point"].toString().toInt()
+                        gUser4Value = doc.get("value").toString().toInt()
+                        gUser4Status = doc.get("status").toString()
+                        if (gUser4Status == "host") {
                             txtName2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                             txtPoint2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                             txtStatus2_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                         }
                         var text = doc.get("text").toString()
-                        txtName2_page3UI.setText("${gUser2Name}")
-                        txtPoint2_page3UI.setText("คะแนน: ${gUser2Point}")
+                        txtName2_page3UI.setText("${gUser4Name}")
+                        txtPoint2_page3UI.setText("คะแนน: ${gUser4Point}")
                         txtStatus2_page3UI.setText("$text")
-                        if (gUser2Value == 8 || gUser2Value == 9) {
+                        if (gUser4Value == 8 || gUser4Value == 9) {
                             if (getCard.size == 2) {
                                 imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                 imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
-                                txtName2_page3UI.setText("${gUser2Name} / ${gUser2Value}")
+                                txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
                             } else {
                                 imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                 imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
                                 imgView2_3_page3UI.setImageResource(getCardShow(getCard[2]))
-                                txtName2_page3UI.setText("${gUser2Name} / ${gUser2Value}")
+                                txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
                             }
 
                         }
                         if (stage >= 3) {
-                            txtName2_page3UI.setText("${gUser2Name} / ${gUser2Value}")
-                            txtPoint2_page3UI.setText("คะแนน: ${gUser2Point}")
+                            txtName2_page3UI.setText("${gUser4Name} / ${gUser4Value}")
+                            txtPoint2_page3UI.setText("คะแนน: ${gUser4Point}")
                             imgView2_1_page3UI.setImageResource(getCardShow(getCard[0]))
                             imgView2_2_page3UI.setImageResource(getCardShow(getCard[1]))
                             if (getCard.size == 3) {
@@ -415,36 +432,36 @@ class Page3_GameUi : AppCompatActivity() {
                             }
                         }
                     } else if (doc.containsValue(gUser4["name"].toString())) {  //TODO user4
-                        gUser4 = doc
-                        gUser4Name = doc["name"].toString()
-                        gUser4Point = doc["point"].toString().toInt()
-                        gUser4Value = doc.get("value").toString().toInt()
-                        gUser4Status = doc.get("status").toString()
-                        if (gUser4Status == "host") {
+                        gUser2 = doc
+                        gUser2Name = doc["name"].toString()
+                        gUser2Point = doc["point"].toString().toInt()
+                        gUser2Value = doc.get("value").toString().toInt()
+                        gUser2Status = doc.get("status").toString()
+                        if (gUser2Status == "host") {
                             txtName4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                             txtPoint4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                             txtStatus4_page3UI.setTextColor(Color.parseColor("#DD0A0A"))
                         }
                         var text = doc.get("text").toString()
-                        txtName4_page3UI.setText("${gUser4Name}")
-                        txtPoint4_page3UI.setText("Point: ${gUser4Point}")
+                        txtName4_page3UI.setText("${gUser2Name}")
+                        txtPoint4_page3UI.setText("Point: ${gUser2Point}")
                         txtStatus4_page3UI.setText("$text")
 
-                        if (gUser4Value == 8 || gUser4Value == 9) {
+                        if (gUser2Value == 8 || gUser2Value == 9) {
                             if (getCard.size == 2) {
-                                txtName4_page3UI.setText("${gUser4Name} / ${gUser4Value}")
+                                txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
                                 imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                 imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
                             } else {
-                                txtName4_page3UI.setText("${gUser4Name} / ${gUser4Value}")
+                                txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
                                 imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
                                 imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
                                 imgView4_3_page3UI.setImageResource(getCardShow(getCard[2]))
                             }
                         }
                         if (stage >= 3) {
-                            txtName4_page3UI.setText("${gUser4Name} / ${gUser4Value}")
-                            txtPoint4_page3UI.setText("คะแนน: ${gUser4Point}")
+                            txtName4_page3UI.setText("${gUser2Name} / ${gUser2Value}")
+                            txtPoint4_page3UI.setText("คะแนน: ${gUser2Point}")
                             imgView4_1_page3UI.setImageResource(getCardShow(getCard[0]))
                             imgView4_2_page3UI.setImageResource(getCardShow(getCard[1]))
 
@@ -457,32 +474,32 @@ class Page3_GameUi : AppCompatActivity() {
                     }
                 }
             } else {
-                txtName1_page3UI.setText("")
-                txtPoint1_page3UI.setText("")
-                txtStatus1_page3UI.setText("")
-                txtName2_page3UI.setText("")
-                txtPoint2_page3UI.setText("")
-                txtStatus2_page3UI.setText("")
-                txtName3_page3UI.setText("")
-                txtPoint3_page3UI.setText("")
-                txtStatus3_page3UI.setText("")
-                txtName4_page3UI.setText("")
-                txtPoint4_page3UI.setText("")
-                txtStatus4_page3UI.setText("")
-                imgView1_1_page3UI.setImageResource(R.drawable.backphai)
-                imgView1_2_page3UI.setImageResource(R.drawable.backphai)
-                imgView1_3_page3UI.setImageResource(R.drawable.backphai)
-                imgView2_1_page3UI.setImageResource(R.drawable.backphai)
-                imgView2_2_page3UI.setImageResource(R.drawable.backphai)
-                imgView2_3_page3UI.setImageResource(R.drawable.backphai)
-                imgView3_1_page3UI.setImageResource(R.drawable.backphai)
-                imgView3_2_page3UI.setImageResource(R.drawable.backphai)
-                imgView3_3_page3UI.setImageResource(R.drawable.backphai)
-                imgView4_1_page3UI.setImageResource(R.drawable.backphai)
-                imgView4_2_page3UI.setImageResource(R.drawable.backphai)
-                imgView4_3_page3UI.setImageResource(R.drawable.backphai)
-//                var intent = Intent(this, Page1_Login::class.java)
-//                startActivity(intent)
+//                txtName1_page3UI.setText("")
+//                txtPoint1_page3UI.setText("")
+//                txtStatus1_page3UI.setText("")
+//                txtName2_page3UI.setText("")
+//                txtPoint2_page3UI.setText("")
+//                txtStatus2_page3UI.setText("")
+//                txtName3_page3UI.setText("")
+//                txtPoint3_page3UI.setText("")
+//                txtStatus3_page3UI.setText("")
+//                txtName4_page3UI.setText("")
+//                txtPoint4_page3UI.setText("")
+//                txtStatus4_page3UI.setText("")
+//                imgView1_1_page3UI.setImageResource(R.drawable.backphai)
+//                imgView1_2_page3UI.setImageResource(R.drawable.backphai)
+//                imgView1_3_page3UI.setImageResource(R.drawable.backphai)
+//                imgView2_1_page3UI.setImageResource(R.drawable.backphai)
+//                imgView2_2_page3UI.setImageResource(R.drawable.backphai)
+//                imgView2_3_page3UI.setImageResource(R.drawable.backphai)
+//                imgView3_1_page3UI.setImageResource(R.drawable.backphai)
+//                imgView3_2_page3UI.setImageResource(R.drawable.backphai)
+//                imgView3_3_page3UI.setImageResource(R.drawable.backphai)
+//                imgView4_1_page3UI.setImageResource(R.drawable.backphai)
+//                imgView4_2_page3UI.setImageResource(R.drawable.backphai)
+//                imgView4_3_page3UI.setImageResource(R.drawable.backphai)
+                var intent = Intent(this, Page1_Login::class.java)
+                startActivity(intent)
             }
         }
     }

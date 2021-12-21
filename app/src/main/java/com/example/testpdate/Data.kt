@@ -2,6 +2,7 @@ package com.example.testpdate
 
 data class Data(var data: String)
 data class key(
+    var id: String = "id",
     var name: String = "name",
     val value: String = "value",
     val point: String = "point",

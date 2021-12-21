@@ -75,30 +75,39 @@ class Page1_Login : AppCompatActivity() {
                             "point" to 500,
                             "status" to "host",
                             "text" to "",
+                            "id"    to 1,
                             "card" to backCard)
-                        var a = mapOf<String, Any>("data" to "a")
+                        var a = mapOf<String, Any>("countID" to "1")
                         db_data_next.set(a)
                         val intent = Intent(this, Page2_CreatRoom::class.java)
                         var cards = card as ArrayList<String>
+                        var id = 1
                         intent.putExtra("card", cards)
                         intent.putExtra("userHashMap", userHashMap)
                         intent.putExtra("checkName",getStringEdt)
+                        intent.putExtra("id",id)
                         startActivity(intent)
                     }
                 } else {
                     if (edt_Page1_login.text.toString() == "") {
                         toast("โปรดตั้งชื่อเพื่อเข้าร่วมเกม")
                     } else {
+                        var getId = docs.get("countID").toString().toInt()
+                        var id = getId + 1
                         var userHashMap = hashMapOf<String, Any>(
                             "name" to getStringEdt,
                             "value" to 0,
                             "point" to 500,
                             "status" to "user",
                             "text" to "",
+                            "id" to id,
                             "card" to backCard)
+                        var a = hashMapOf<String,Any>("countID" to id)
+                        db_data_next.set(a)
                         val intent = Intent(this, Page2_SelectRoom::class.java)
                         intent.putExtra("userHashMap", userHashMap)
                         intent.putExtra("checkName",getStringEdt)
+                        intent.putExtra("id",id)
                         startActivity(intent)
                     }
                 }

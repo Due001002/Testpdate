@@ -34,6 +34,7 @@ class Page2_CreatRoom : AppCompatActivity() {
         var getCheckName = bundle!!.getString("checkName")
         var getUserMapPage1 = bundle!!.get("userHashMap") as HashMap<String, Any>
         var getCardPage1 = bundle!!.get("card") as ArrayList<String>
+        var getID = bundle!!.getInt("id")
         logdfix("userHashMap", "$getUserMapPage1")
         btnCreat_page2_CreatRoom.setOnClickListener {  //TODO btn_OnClick
             if (gSizePlayer == gCheckSizePlayer || edt_page2_CreatRoom.text.toString() == "") {
@@ -63,6 +64,7 @@ class Page2_CreatRoom : AppCompatActivity() {
                 intent.putExtra("userHashMap", getUserMapPage1)
                 intent.putExtra("checkName",getCheckName)
                 intent.putExtra("card",getCardPage1)
+                intent.putExtra("id",getID)
                 startActivity(intent)
             }
         }
