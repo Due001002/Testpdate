@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_page3_game_ui.*
 
 class Page3_GameUi : AppCompatActivity() {
     var db = FirebaseFirestore.getInstance()
-    var db_next = db.collection("data").document("next")
+    var db_data_next = db.collection("data").document("next")
     var dbGiveCard = db.collection("data").document("next").collection("giveCard")
     var db_data_next_room = db.collection("data").document("next").collection("room")
     var gRoomName = ""
@@ -513,7 +513,7 @@ class Page3_GameUi : AppCompatActivity() {
         btnGiveCard.setOnClickListener {
             var a = mapOf(gKey.giveCard to 1)
             dbGiveCard.document(gMe[gKey.name].toString()).set(a)
-            btnGiveCard.isVisible = false
+            //btnGiveCard.isVisible = false
         }
     }
 
@@ -584,7 +584,7 @@ class Page3_GameUi : AppCompatActivity() {
             getCardDB.removeAt(0)
             getCardDB.removeAt(0)
             totalHost = calculatorValue(rsIdCardMe_1.value, rsIdCardMe_2.value)
-            totalUser2 = calculatorValue(rsIdCardUser2_1.value, rsIdCardUser2_2.value)
+            totalUser4 = calculatorValue(rsIdCardUser2_1.value, rsIdCardUser2_2.value)
             var updateUser1 = mutableListOf<Map<Any, Any>>(
                 mapOf(
                     gKey.name   to gMe.get("name").toString(),
@@ -641,7 +641,7 @@ class Page3_GameUi : AppCompatActivity() {
             getCardDB.removeAt(0)
             getCardDB.removeAt(0)
             totalHost = calculatorValue(rsIdCardMe_1.value, rsIdCardMe_2.value)
-            totalUser2 = calculatorValue(rsIdCardUser2_1.value, rsIdCardUser2_2.value)
+            totalUser4 = calculatorValue(rsIdCardUser2_1.value, rsIdCardUser2_2.value)
             totalUser3 = calculatorValue(rsIdCardUser3_1.value, rsIdCardUser3_2.value)
 
             var updateUser1 = mutableListOf<Map<Any, Any>>(
@@ -655,15 +655,6 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.card   to cardHost
                 ),
                 mapOf(
-                    gKey.name   to gUser3.get("name").toString(),
-                    gKey.value  to totalUser3,
-                    gKey.point  to gUser3.get("point").toString(),
-                    gKey.status to gUser3.get("status").toString(),
-                    gKey.text   to gUser3.get("text").toString(),
-                    gKey.id     to gUser3.get("id").toString().toInt(),
-                    gKey.card   to cardUser3
-                ),
-                mapOf(
                     gKey.name   to gUser4.get("name").toString(),
                     gKey.value  to totalUser4,
                     gKey.point  to gUser4.get("point").toString(),
@@ -671,6 +662,15 @@ class Page3_GameUi : AppCompatActivity() {
                     gKey.text   to gUser4.get("text").toString(),
                     gKey.id     to gUser4.get("id").toString().toInt(),
                     gKey.card   to cardUser4
+                ),
+                mapOf(
+                    gKey.name   to gUser3.get("name").toString(),
+                    gKey.value  to totalUser3,
+                    gKey.point  to gUser3.get("point").toString(),
+                    gKey.status to gUser3.get("status").toString(),
+                    gKey.text   to gUser3.get("text").toString(),
+                    gKey.id     to gUser3.get("id").toString().toInt(),
+                    gKey.card   to cardUser3
                 )
             )
 
@@ -794,7 +794,7 @@ class Page3_GameUi : AppCompatActivity() {
                             var stateGiveCard = it!!.get(gKey.giveCard).toString().toInt()
                             if (stateGiveCard == 1) {
                                 var getvalueCard = getCardString(getCard[0])
-                                valuegUser2New = getvalueCard.value
+                                valuegUser4New = getvalueCard.value
                                 cardUser4GiveCard.add(getCard[0])
                                 getCard.removeAt(0)
                                 logdfix("GiveCard", "cardUser2: $cardUser4GiveCard")
@@ -1039,7 +1039,7 @@ class Page3_GameUi : AppCompatActivity() {
                 mapOf(
                     gKey.name   to gUser4.get("name").toString(),
                     gKey.value  to gUser4Value,
-                    gKey.point  to totalPointUser2,
+                    gKey.point  to totalPointUser4,
                     gKey.status to gUser4.get("status").toString(),
                     gKey.text   to textUser4,
                     gKey.id     to gUser4.get("id").toString().toInt(),
@@ -1562,27 +1562,81 @@ class Page3_GameUi : AppCompatActivity() {
     fun sendDataToPage4() {
         var arrayPoint = mutableListOf<Int>()
         var arrayUser = mutableListOf<HashMap<String, Any>>()
-        if (ggetSize == 2) {
-            arrayUser.add(gMe)
-            arrayUser.add(gUser2)
-            arrayPoint.add(gMePoint)
-            arrayPoint.add(gUser2Point)
-        } else if (ggetSize == 3) {
-            arrayUser.add(gMe)
-            arrayUser.add(gUser2)
-            arrayUser.add(gUser3)
-            arrayPoint.add(gMePoint)
-            arrayPoint.add(gUser2Point)
-            arrayPoint.add(gUser3Point)
-        } else if (ggetSize == 4) {
-            arrayUser.add(gMe)
-            arrayUser.add(gUser2)
-            arrayUser.add(gUser3)
-            arrayUser.add(gUser4)
-            arrayPoint.add(gMePoint)
-            arrayPoint.add(gUser2Point)
-            arrayPoint.add(gUser3Point)
-            arrayPoint.add(gUser4Point)
+        if (ID == 1) {
+            if (ggetSize == 2) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser4)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser4Point)
+            } else if (ggetSize == 3) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser4)
+                arrayUser.add(gUser3)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser4Point)
+                arrayPoint.add(gUser3Point)
+            } else if (ggetSize == 4) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser2)
+                arrayUser.add(gUser3)
+                arrayUser.add(gUser4)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser2Point)
+                arrayPoint.add(gUser3Point)
+                arrayPoint.add(gUser4Point)
+            }
+        }else if (ID == 2) {
+            if (ggetSize == 2) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser2)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser2Point)
+            } else if (ggetSize == 3) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser4)
+                arrayUser.add(gUser2)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser4Point)
+                arrayPoint.add(gUser2Point)
+            } else if (ggetSize == 4) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser2)
+                arrayUser.add(gUser3)
+                arrayUser.add(gUser4)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser2Point)
+                arrayPoint.add(gUser3Point)
+                arrayPoint.add(gUser4Point)
+            }
+        }else if (ID == 3) {
+            if (ggetSize == 3) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser3)
+                arrayUser.add(gUser2)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser3Point)
+                arrayPoint.add(gUser2Point)
+            } else if (ggetSize == 4) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser2)
+                arrayUser.add(gUser3)
+                arrayUser.add(gUser4)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser2Point)
+                arrayPoint.add(gUser3Point)
+                arrayPoint.add(gUser4Point)
+            }
+        }else if (ID == 4) {
+            if (ggetSize == 4) {
+                arrayUser.add(gMe)
+                arrayUser.add(gUser2)
+                arrayUser.add(gUser3)
+                arrayUser.add(gUser4)
+                arrayPoint.add(gMePoint)
+                arrayPoint.add(gUser2Point)
+                arrayPoint.add(gUser3Point)
+                arrayPoint.add(gUser4Point)
+            }
         }
         var arraypoint = arrayListOf<Int>()
         arraypoint.addAll(arrayPoint.sortedDescending())
@@ -1663,5 +1717,21 @@ class Page3_GameUi : AppCompatActivity() {
     //TODO Logdfix
     fun logdfix(a: String, b: String) {
         Log.d(a, b)
+    }
+
+    //TODO OnStop
+    override fun onStop() {
+        super.onStop()
+        db_data_next_room.document(gRoomName).delete().addOnSuccessListener {
+        db_data_next.delete()
+        }
+    }
+
+    //TODO OnDesTroy
+    override fun onDestroy() {
+        super.onDestroy()
+        db_data_next_room.document(gRoomName).delete().addOnSuccessListener {
+            db_data_next.delete()
+        }
     }
 }
